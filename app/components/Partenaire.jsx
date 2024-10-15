@@ -89,7 +89,7 @@ export default function Partenaire() {
           </div>
         </div>
         
-        <div className="mt-16 pb-10">
+        <div className="my-20 pb-10 px-4">
           <h2 className="text-3xl font-bold text-center text-blue-700 mb-2">Nos clients</h2>
           <p className="text-center text-gray-600 mb-12">Nous avons travaillé avec plusieurs clients</p>
           <div className="flex justify-between items-center">

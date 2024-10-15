@@ -4,7 +4,7 @@ import voyage from '../public/voyage.png'
 
 const CTAButton = () => {
   return (
-    <div className="relative bg-red-600 p-8 rounded-lg overflow-hidden h-64 w-full max-w-4xl mx-auto mb-6 flex items-center justify-center">
+    <div className="relative bg-red-600 p-8 rounded-lg overflow-hidden h-64 w-full max-w-4xl mx-auto my-24 flex items-center justify-center ">
       <Image 
         src={voyage}
         alt="Fond de voyage"

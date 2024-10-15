@@ -1,6 +1,8 @@
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ScrollPageIndicator from "./components/ScollPageIncdicator";
+import PageTransition from "./components/Pagetransition";
 
 export const metadata = {
   title: "Kadi Prestige",
@@ -12,7 +14,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Navbar />
-        {children}
+        <ScrollPageIndicator />
+        <PageTransition>
+          {children}
+        </PageTransition>
         <Footer />
       </body>
     </html>

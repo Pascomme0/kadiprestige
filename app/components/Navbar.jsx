@@ -9,22 +9,6 @@ import { motion } from 'framer-motion';
 
 export default function SimpleModernHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false); 
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   const linkHoverVariants = {
     rest: { opacity: 1 },
@@ -51,7 +35,7 @@ export default function SimpleModernHeader() {
     },
   };
   return (
-    <header className={`sticky top-0 z-50 w-full bg-white shadow-lg items-center transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg bg-white/60' : ''}`}>
+    <header className="sticky top-0 z-50 w-full bg-white shadow-lg items-center">
       <div className="container mx-auto px-4 items-center">
         <div className="flex h-16 items-center justify-between">
           <Link
@@ -68,7 +52,7 @@ export default function SimpleModernHeader() {
           <nav
             className={`${
               isMenuOpen ? 'flex' : 'hidden'
-            } absolute left-0 right-0 top-16 flex-col items-center space-y-4 p-4 shadow-md md:static md:flex md:flex-row md:space-x-6 md:space-y-0 md:p-0 md:shadow-none text-[15px] text-gray-800`}
+            } absolute left-0 right-0 top-16 flex-col items-center space-y-4 p-4 shadow-md bg-white md:static md:flex md:flex-row md:space-x-6 md:space-y-0 md:p-0 md:shadow-none text-[15px] text-gray-800`}
           >
             {['Accueil', 'Presentation', 'Services', 'Realisation', 'Agence de voyage'].map((item) => (
               <motion.div
@@ -81,7 +65,7 @@ export default function SimpleModernHeader() {
               >
                 <Link                
                  scroll={true}
-                  href={item === 'Accueil' ? '/' : `../pages/${item.toLowerCase()}`}
+                  href={item === 'Accueil' ? '/' : item === 'Agence de voyage' ? '../pages/agencedevoyage' : `../pages/${item.toLowerCase()}`}
                   className="text-gray-800 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -102,7 +86,7 @@ export default function SimpleModernHeader() {
                 whileHover="hover"
                 animate="rest"
                 variants={buttonHoverVariants}
-                className="hidden md:inline-flex px-4 py-2 text-sm font-medium text-white bg-[#EA1D24]  rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 relative overflow-hidden"
+                className="inline-flex px-4 py-2 text-sm font-medium text-white bg-[#EA1D24] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 relative overflow-hidden"
               >
                 <span className="relative z-10">Contact</span>
                 <motion.div
