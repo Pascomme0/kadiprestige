@@ -22,7 +22,7 @@ const PageTransition = ({ children }) => {
   };
 
   const pageTransition = {
-    type: 'faded',
+    type: 'tween',
     ease: 'easeInOut',
     duration: 0.6,
   };
@@ -36,7 +36,6 @@ const PageTransition = ({ children }) => {
         exit="out"
         variants={pageVariants}
         transition={pageTransition}
-        style={{ overflow: 'hidden' }}
       >
         {children}
       </motion.div>
