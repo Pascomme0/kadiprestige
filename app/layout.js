@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollPageIndicator from "./components/ScollPageIncdicator";
 import PageTransition from "./components/Pagetransition";
+import banner from '../app/public/banner.jpg'
+
 
 export const metadata = {
   title: "Kadi Prestige",

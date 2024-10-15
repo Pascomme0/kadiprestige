@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Facebook, Linkedin } from 'lucide-react';
 
 export default function SimpleModernHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

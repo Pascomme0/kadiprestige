@@ -1,12 +1,12 @@
 import React from 'react'
-import { Import } from 'lucide-react'
 import Whoweare from './components/Whoweare'
 import ServicesAccueil from './components/ServiceAccueil'
 import Partenaire from './components/Partenaire'
 import Testimonial from './components/Testimonial'
 import Banner from './components/Banner'
 import CTAbutton from './components/CTAbutton'
-import banner from '../../kadiprestige/app/public/banner.jpg'
+import banner from '../app/public/banner.jpg'
+
 const page = () => {
   return (
     <div>
@@ -16,11 +16,6 @@ const page = () => {
       <Partenaire />
       <Testimonial />
       <CTAbutton />
-
-
-
-
-
     </div>
   )
 }
