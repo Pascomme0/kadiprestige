@@ -2,26 +2,27 @@
 
 import { useState } from 'react'
 import { MessageSquare } from 'lucide-react'
+import Link from 'next/link'
 
 export default function FAQSection() {
   const [openQuestion, setOpenQuestion] = useState(0)
 
   const faqData = [
     {
-      question: "Comment ça marche ?",
-      answer: "Vous lorem ipsum dolor sit amet consectetur elit amet? Vous lorem ipsum dolor sit amet consectetur elit amet? Vous lorem ipsum dolor sit amet consectetur elit amet? Vous lorem ipsum dolor sit amet consectetur elit amet?"
+      question: "Quels sont les services proposés par Kadi Prestige ?",
+      answer: "Kadi Prestige offre une gamme variée de services, incluant des travaux de forage et d'adduction d'eau potable, des projets de BTP (construction de routes et de bâtiments), la livraison de denrées alimentaires, la production et distribution d'eau potable 'Kadi Prestige', ainsi que la confection de tenues et uniformes de travail. Nous avons également une ONG dédiée à l'autonomisation des femmes et à l'aide aux personnes démunies."
     },
     {
-      question: "Comment ça marche ?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      question: "Comment puis-je demander un devis pour un projet ?",
+      answer: "Pour obtenir un devis, vous pouvez nous contacter via notre formulaire en ligne sur notre site web, nous appeler directement au numéro indiqué dans la section contact, ou nous envoyer un email détaillant votre projet. Notre équipe vous répondra dans les plus brefs délais pour discuter de vos besoins spécifiques et vous fournir une estimation précise."
     },
     {
-      question: "Comment ça marche ?",
-      answer: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      question: "Quelle est la zone géographique couverte par vos services ?",
+      answer: "Kadi Prestige opère principalement en Côte d'Ivoire, avec une présence forte à Abidjan et dans les principales villes du pays. Cependant, nous sommes en mesure de réaliser des projets sur l'ensemble du territoire national et sommes ouverts à des opportunités dans la sous-région ouest-africaine selon la nature et l'envergure du projet."
     },
     {
-      question: "Comment ça marche ?",
-      answer: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      question: "Comment Kadi Prestige garantit-elle la qualité de ses services ?",
+      answer: "Chez Kadi Prestige, nous accordons une importance primordiale à la qualité. Nous employons des professionnels hautement qualifiés, utilisons des équipements modernes et suivons rigoureusement les normes internationales dans tous nos projets. De plus, nous effectuons des contrôles qualité réguliers et sollicitons systématiquement les retours de nos clients pour assurer une amélioration continue de nos services."
     }
   ]
 
@@ -35,13 +36,13 @@ export default function FAQSection() {
             
             <div className="space-y-4">
               {faqData.map((faq, index) => (
-                <div key={index} className="border-b border-gray-200">
+                <div key={index} className="border-b border-gray-300">
                   <button
                     className="flex justify-between items-center w-full py-4 text-left"
                     onClick={() => setOpenQuestion(openQuestion === index ? -1 : index)}
                     aria-expanded={openQuestion === index}
                   >
-                    <span className="text-blue-600 font-medium">{faq.question}</span>
+                    <span className="text-blue-700 text-[17px] font-medium">{faq.question}</span>
                     <span className="text-2xl transition-transform duration-300" style={{
                       transform: openQuestion === index ? 'rotate(45deg)' : 'rotate(0deg)'
                     }}>
@@ -59,9 +60,11 @@ export default function FAQSection() {
             </div>
 
             <div className="flex justify-center mt-8">
-              <button className="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors">
-                J'ai une question
-              </button>
+              <Link href="../pages/contact">
+                <button className="bg-[#EA1D24] text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors">
+                  J'ai une question
+                </button>
+              </Link>
             </div>
           </div>        
           <div className="w-1/3 flex justify-center">

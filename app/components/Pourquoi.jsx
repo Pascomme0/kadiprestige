@@ -5,18 +5,18 @@ const Pourquoi = () => {
   const raisons = [
     {
       numero: 1,
-      titre: "Très grande expertise",
-      description: "lorem ipsum dolor sit alert lorem ipsum dolor sit alert"
+      titre: "Expertise polyvalente",
+      description: "Notre équipe possède une vaste expérience dans divers domaines, de l'hydraulique au BTP, garantissant des solutions complètes pour vos projets."
     },
     {
       numero: 2,
-      titre: "Lorem ipsum dolor sit",
-      description: "lorem ipsum dolor sit alert lorem ipsum dolor sit alert"
+      titre: "Engagement social",
+      description: "Au-delà de nos services, notre ONG s'engage activement dans l'autonomisation des femmes et l'aide aux personnes démunies."
     },
     {
       numero: 3,
-      titre: "Lorem ipsum dolor sit amet",
-      description: "lorem ipsum dolor sit alert lorem ipsum dolor sit alert"
+      titre: "Qualité et fiabilité",
+      description: "Nous nous engageons à fournir des services de haute qualité, respectant les normes les plus strictes pour assurer la satisfaction de nos clients."
     }
   ];
 
@@ -33,7 +33,7 @@ const Pourquoi = () => {
       </div>
       <div className="md:w-1/2 md:pl-8">
         <h2 className="text-3xl font-bold text-[#073EA2] mb-4">Pourqoi travailler avec nous ?</h2>
-        <p className="text-[#818181] mb-6">lorem ipsum dolor sit alert lorem ipsum dolor sit alert</p>
+        <p className="text-[#818181] mb-6">Kadi Prestige se distingue par son expertise diversifiée et son engagement envers l'excellence et la responsabilité sociale.</p>
         
         {raisons.map((raison) => (
           <div key={raison.numero} className="flex items-start mb-4">
@@ -52,4 +52,3 @@ const Pourquoi = () => {
 };
 
 export default Pourquoi;
-

@@ -24,8 +24,8 @@ export default function Services() {
           {services.map((service, index) => (
             <div key={index} className="border border-gray-300 p-6 rounded-lg">
               <Share2 className="text-[#EA1D24] w-8 h-8 mb-4" />
-              <h4 className="text-blue-700 font-medium text-lg mb-2">{service.title}</h4>
-              <p className="text-gray-600 text-sm">{service.description}</p>
+              <h4 className="text-[#073EA2] font-semibold text-lg mb-2">{service.title}</h4>
+              <p className="text-gray-600 text-[17px]">{service.description}</p>
             </div>
           ))}
         </div>

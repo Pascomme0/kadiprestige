@@ -5,33 +5,33 @@ import voyage from '../public/voyage.png'
 
 const projets = [
   {
-    titre: "Titre du projet",
-    description: "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur.",
+    titre: "Forage d'eau potable à Bouaké",
+    description: "Réalisation d'un forage profond pour l'approvisionnement en eau potable de la communauté de Bouaké. Ce projet a permis d'améliorer significativement l'accès à l'eau propre pour plus de 5000 habitants de la région.",
     image: voyage
   },
   {
-    titre: "Titre du projet",
-    description: "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur.",
+    titre: "Construction d'une école à Yamoussoukro",
+    description: "Édification d'un établissement scolaire moderne à Yamoussoukro, comprenant 12 salles de classe, une bibliothèque et des installations sanitaires. Ce projet a augmenté la capacité d'accueil scolaire de la ville de 500 élèves.",
     image: voyage
   },
   {
-    titre: "Titre du projet",
-    description: "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur.",
+    titre: "Rénovation du réseau d'adduction d'eau à Abidjan",
+    description: "Modernisation et extension du réseau d'adduction d'eau dans plusieurs quartiers d'Abidjan. Cette initiative a permis d'améliorer la distribution d'eau pour plus de 100 000 résidents et de réduire les pertes d'eau de 30%.",
     image: voyage
   },
   {
-    titre: "Titre du projet",
-    description: "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur.",
+    titre: "Construction d'un centre de santé à Man",
+    description: "Érection d'un centre de santé communautaire à Man, équipé de services de consultation, de maternité et d'un laboratoire. Ce projet a considérablement amélioré l'accès aux soins de santé pour plus de 20 000 personnes dans la région.",
     image: voyage
   },
   {
-    titre: "Titre du projet",
-    description: "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur.",
+    titre: "Aménagement d'un marché couvert à Korhogo",
+    description: "Conception et construction d'un marché couvert moderne à Korhogo, offrant des espaces de vente sécurisés et hygiéniques pour plus de 200 commerçants locaux. Ce projet a dynamisé l'économie locale et amélioré les conditions de travail des vendeurs.",
     image: voyage
   },
   {
-    titre: "Titre du projet",
-    description: "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur.",
+    titre: "Installation de panneaux solaires à Daloa",
+    description: "Mise en place d'un système d'énergie solaire pour alimenter les bâtiments publics de Daloa. Cette initiative a réduit la dépendance aux énergies fossiles et diminué les coûts énergétiques de la municipalité de 40%.",
     image: voyage
   },
   // Ajoutez d'autres projets ici
