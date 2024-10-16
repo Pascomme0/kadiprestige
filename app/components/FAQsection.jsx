@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { MessageSquare } from 'lucide-react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 export default function FAQSection() {
   const [openQuestion, setOpenQuestion] = useState(0)
@@ -27,16 +28,32 @@ export default function FAQSection() {
   ]
 
   return (
-    <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <motion.div 
+      className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-start">
-          <div className="w-2/3 pr-8">
+          <motion.div 
+            className="w-2/3 pr-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <h2 className="text-3xl font-bold mb-2">Vous avez quelques questions ?</h2>
             <p className="text-gray-600 mb-8">Voici quelques questions fréquemment posées</p>
             
             <div className="space-y-4">
               {faqData.map((faq, index) => (
-                <div key={index} className="border-b border-gray-300">
+                <motion.div 
+                  key={index} 
+                  className="border-b border-gray-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
                   <button
                     className="flex justify-between items-center w-full py-4 text-left"
                     onClick={() => setOpenQuestion(openQuestion === index ? -1 : index)}
@@ -49,29 +66,41 @@ export default function FAQSection() {
                       +
                     </span>
                   </button>
-                  <div 
-                    className="overflow-hidden transition-all duration-300 ease-in-out"
-                    style={{ maxHeight: openQuestion === index ? '1000px' : '0' }}
+                  <motion.div 
+                    className="overflow-hidden"
+                    initial={{ height: 0 }}
+                    animate={{ height: openQuestion === index ? 'auto' : 0 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <p className="pb-4 text-gray-600">{faq.answer}</p>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               ))}
             </div>
 
-            <div className="flex justify-center mt-8">
+            <motion.div 
+              className="flex justify-center mt-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.5 }}
+            >
               <Link href="../pages/contact">
                 <button className="bg-[#EA1D24] text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors">
                   J'ai une question
                 </button>
               </Link>
-            </div>
-          </div>        
-          <div className="w-1/3 flex justify-center">
+            </motion.div>
+          </motion.div>        
+          <motion.div 
+            className="w-1/3 flex justify-center"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
             <MessageSquare className="w-40 h-40 mt-28 text-gray-400" />
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

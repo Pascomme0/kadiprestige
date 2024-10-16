@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../public/logoblanc.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebookF, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 
 const Footer = () => {
   return (
@@ -22,9 +24,13 @@ const Footer = () => {
             <h3 className="font-bold mb-4">Liens utiles</h3>
             <ul>
               {['Accueil', 'Presentation', 'Services', 'Realisation', 'Agence de voyage'].map((item) => (
-                <li key= {item}
-                 className="mb-2">
-                  <Link href={item === 'Accueil' ? '/' : item === 'Agence de voyage' ? '../pages/agencedevoyage' : `../pages/${item.toLowerCase()}`}>{item}</Link>
+                <li key={item} className="mb-2">
+                  <Link 
+                    href={item === 'Accueil' ? '/' : item === 'Agence de voyage' ? '../pages/agencedevoyage' : `../pages/${item.toLowerCase()}`}
+                    className="hover:text-blue-300 transition-colors duration-300"
+                  >
+                    {item}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -44,11 +50,11 @@ const Footer = () => {
           <div>
             <h3 className="font-bold mb-4">Nos réseaux</h3>
             <div className="flex space-x-4">
-              <Link href="#" aria-label="Facebook">
-                <Image src="/path/to/facebook-icon.png" alt="Facebook" width={24} height={24} />
+              <Link href="#" aria-label="Facebook" className="hover:text-blue-300 transition-colors duration-300">
+                <FontAwesomeIcon icon={faFacebookF} className="w-6 h-6" />
               </Link>
-              <Link href="#" aria-label="LinkedIn">
-                <Image src="/path/to/linkedin-icon.png" alt="LinkedIn" width={24} height={24} />
+              <Link href="#" aria-label="LinkedIn" className="hover:text-blue-300 transition-colors duration-300">
+                <FontAwesomeIcon icon={faLinkedinIn} className="w-6 h-6" />
               </Link>
             </div>
           </div>

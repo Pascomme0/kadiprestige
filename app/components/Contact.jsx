@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import voyage from '../public/voyage.png'
+import { motion } from 'framer-motion';
 
 export default function Contact() {
   const [focusedInput, setFocusedInput] = useState(null);
@@ -17,9 +18,19 @@ export default function Contact() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-6xl mx-auto px-4 py-16"
+    >
       <div className="flex flex-col md:flex-row justify-between mb-28">
-        <div className="flex flex-col items-center mb-6 md:mb-0">
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex flex-col items-center mb-6 md:mb-0"
+        >
           <div className="bg-red-100 rounded-full p-6 mb-6">
             <Mail className="text-red-600 w-10 h-10" />
           </div>
@@ -27,8 +38,13 @@ export default function Contact() {
             <h3 className="text-blue-700 text-[20px] font-semibold mb-2">adresse mail</h3>
             <p className="text-gray-600 text-[17px]">kadiprestige@gmail.com</p>
           </div>
-        </div>
-        <div className="flex flex-col items-center mb-6 md:mb-0">
+        </motion.div>
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex flex-col items-center mb-6 md:mb-0"
+        >
           <div className="bg-red-100 rounded-full p-6 mb-6">
             <Phone className="text-red-600 w-10 h-10" />
           </div>
@@ -37,8 +53,13 @@ export default function Contact() {
             <p className="text-gray-600 text-[17px]">22 54 37 89 89</p>
             <p className="text-gray-600 text-[17px]">22 54 37 88 88</p>
           </div>
-        </div>
-        <div className="flex flex-col items-center">
+        </motion.div>
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-col items-center"
+        >
           <div className="bg-red-100 rounded-full p-6 mb-6">
             <MapPin className="text-red-600 w-10 h-10" />
           </div>
@@ -46,11 +67,16 @@ export default function Contact() {
             <h3 className="text-blue-700 text-[20px] font-semibold mb-2">Localisation</h3>
             <p className="text-gray-600 text-[17px]">Abidjan, plateau</p>
           </div>
-        </div>
+        </motion.div>
       </div>
       
       <div className="flex flex-col md:flex-row mb-5">
-        <div className="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+        <motion.div 
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="md:w-1/2 mb-8 md:mb-0 md:pr-8"
+        >
           <h2 className="text-2xl font-bold text-blue-700 mb-2">CONTACT</h2>
           <h3 className="text-xl text-red-600 mb-6">Restez en contact avec nous</h3>
           <form>
@@ -83,12 +109,22 @@ export default function Contact() {
               onFocus={() => handleFocus('message')}
               onBlur={handleBlur}
             ></textarea>
-            <button type="submit" className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition-colors">
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              type="submit" 
+              className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition-colors"
+            >
               Envoyer
-            </button>
+            </motion.button>
           </form>
-        </div>
-        <div className="md:w-1/2 relative">
+        </motion.div>
+        <motion.div 
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="md:w-1/2 relative"
+        >
           <div className="absolute inset-0 bg-red-600 rounded-lg transform translate-x-4 translate-y-2"></div>
           <Image 
             src={voyage} 
@@ -98,8 +134,8 @@ export default function Contact() {
             layout="responsive"
             className="rounded-lg relative z-10"
           />
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
