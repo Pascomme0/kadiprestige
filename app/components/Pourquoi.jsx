@@ -3,8 +3,11 @@
 import Image from 'next/image';
 import image from '../public/image.png'
 import { motion } from 'framer-motion';
+import { useMediaQuery } from 'react-responsive';
 
 const Pourquoi = () => {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
   const raisons = [
     {
       numero: 1,
@@ -25,22 +28,24 @@ const Pourquoi = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-center mx-auto justify-between p-8 bg-white">
+      {!isMobile && (
+        <motion.div 
+          className="md:w-1/2 mb-8 md:mb-0"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Image
+            src={image}
+            alt="Image de construction"
+            width={500}
+            height={300}
+            objectFit="cover"
+          />
+        </motion.div>
+      )}
       <motion.div 
-        className="md:w-1/2 mb-8 md:mb-0"
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Image
-          src={image}
-          alt="Image de construction"
-          width={500}
-          height={300}
-          objectFit="cover"
-        />
-      </motion.div>
-      <motion.div 
-        className="md:w-1/2 md:pl-8"
+        className="w-full md:w-1/2 md:pl-8"
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}

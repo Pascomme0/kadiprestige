@@ -52,7 +52,7 @@ const Presentation = () => {
           </div>
         </motion.div>
         <motion.div 
-          className="w-full md:w-1/2 mt-4 md:mt-0"
+          className="w-full md:w-1/2 mt-4 md:mt-0 hidden md:block"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}

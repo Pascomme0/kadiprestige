@@ -6,6 +6,7 @@ import Testimonial from './components/Testimonial'
 import Banner from './components/Banner'
 import CTAbutton from './components/CTAbutton'
 import banner from '../app/public/banner.jpg'
+import Blog from './components/Blog'
 
 const page = () => {
   return (
@@ -15,6 +16,7 @@ const page = () => {
       <ServicesAccueil />
       <Partenaire />
       <Testimonial />
+      <Blog />
       <CTAbutton />
     </div>
   )

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import voyage from '../public/voyage.png'
+import { useMediaQuery } from 'react-responsive';
 
 const projets = [
   {
@@ -43,6 +44,8 @@ export default function Realisation() {
   const indexOfLastProjet = currentPage * projetsParPage;
   const indexOfFirstProjet = indexOfLastProjet - projetsParPage;
   const currentProjets = projets.slice(indexOfFirstProjet, indexOfLastProjet);
+  
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
@@ -57,12 +60,12 @@ export default function Realisation() {
         {currentProjets.map((projet, index) => (
           <div 
             key={index}
-            className={`flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} items-center mb-12 ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'} p-8 rounded-lg`}
+            className={`flex ${isMobile ? 'flex-col' : index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} items-center mb-12 ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'} p-8 rounded-lg`}
           >
-            <div className="w-1/2 px-4">
-              <Image src={projet.image} alt={projet.titre} width={500} height={300} className="rounded-lg" />
+            <div className={`${isMobile ? 'w-full mb-4' : 'w-1/2'} px-4`}>
+              <Image src={projet.image} alt={projet.titre} width={500} height={300} className="rounded-lg w-full" />
             </div>
-            <div className="w-1/2 px-4">
+            <div className={`${isMobile ? 'w-full' : 'w-1/2'} px-4`}>
               <h4 className="text-2xl font-bold text-[#073EA2] mb-2">
                 {projet.titre}
               </h4>

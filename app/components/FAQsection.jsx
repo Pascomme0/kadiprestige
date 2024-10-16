@@ -4,9 +4,11 @@ import { useState } from 'react'
 import { MessageSquare } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { useMediaQuery } from 'react-responsive'
 
 export default function FAQSection() {
   const [openQuestion, setOpenQuestion] = useState(0)
+  const isMobile = useMediaQuery({ maxWidth: 768 })
 
   const faqData = [
     {
@@ -35,9 +37,9 @@ export default function FAQSection() {
       transition={{ duration: 0.5 }}
     >
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-start">
+        <div className={`flex ${isMobile ? 'flex-col' : 'justify-between items-start'}`}>
           <motion.div 
-            className="w-2/3 pr-8"
+            className={isMobile ? 'w-full' : 'w-2/3 pr-8'}
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -91,14 +93,16 @@ export default function FAQSection() {
               </Link>
             </motion.div>
           </motion.div>        
-          <motion.div 
-            className="w-1/3 flex justify-center"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <MessageSquare className="w-40 h-40 mt-28 text-gray-400" />
-          </motion.div>
+          {!isMobile && (
+            <motion.div 
+              className="w-1/3 flex justify-center"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <MessageSquare className="w-40 h-40 mt-28 text-gray-400" />
+            </motion.div>
+          )}
         </div>
       </div>
     </motion.div>
