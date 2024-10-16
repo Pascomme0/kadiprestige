@@ -22,8 +22,9 @@ const Footer = () => {
             <h3 className="font-bold mb-4">Liens utiles</h3>
             <ul>
               {['Accueil', 'Presentation', 'Services', 'Realisation', 'Agence de voyage'].map((item) => (
-                <li key={item} className="mb-2">
-                  <Link href={`/${item.toLowerCase()}`}>{item}</Link>
+                <li key= {item}
+                 className="mb-2">
+                  <Link href={item === 'Accueil' ? '/' : item === 'Agence de voyage' ? '../pages/agencedevoyage' : `../pages/${item.toLowerCase()}`}>{item}</Link>
                 </li>
               ))}
             </ul>
