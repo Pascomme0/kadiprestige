@@ -15,34 +15,3 @@ body {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
-
-.partenaire {
-  text-align: center;
-  padding: 2rem 0;
-}
-
-.logoContainer {
-  overflow: hidden;
-  width: 100%;
-  margin-top: 2rem;
-}
-
-.logoScroll {
-  display: flex;
-  animation: scroll var(--animation-duration) linear infinite;
-  width: calc(var(--scroll-width) * 2);
-}
-
-.logoWrapper {
-  flex-shrink: 0;
-  padding: 0 1rem;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-1 * var(--scroll-width)));
-  }
-}

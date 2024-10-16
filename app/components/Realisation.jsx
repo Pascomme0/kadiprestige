@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import voyage from '../public/voyage.png'
-import { motion, AnimatePresence } from 'framer-motion';
 
 const projets = [
   {
@@ -45,121 +44,50 @@ export default function Realisation() {
   const indexOfFirstProjet = indexOfLastProjet - projetsParPage;
   const currentProjets = projets.slice(indexOfFirstProjet, indexOfLastProjet);
 
-  const pageVariants = {
-    initial: { opacity: 0, y: 50 },
-    in: { opacity: 1, y: 0 },
-    out: { opacity: 0, y: -50 }
-  };
-
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 0.5
-  };
-
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="max-w-6xl mx-auto px-4 py-16"
-    >
-      <motion.h2 
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="text-center text-2xl font-bold text-[#073EA2] mb-2"
-      >
+    <div className="max-w-6xl mx-auto px-4 py-16">
+      <h2 className="text-center text-2xl font-bold text-[#073EA2] mb-2">
         Ce que nous offrons
-      </motion.h2>
-      <motion.h3 
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-        className="text-center text-3xl font-bold text-[#E11D48] mb-12"
-      >
+      </h2>
+      <h3 className="text-center text-3xl font-bold text-[#E11D48] mb-12">
         Nos projets réalisés
-      </motion.h3>
+      </h3>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentPage}
-          initial="initial"
-          animate="in"
-          exit="out"
-          variants={pageVariants}
-          transition={pageTransition}
-        >
-          {currentProjets.map((projet, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className={`flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} items-center mb-12 ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'} p-8 rounded-lg`}
-            >
-              <motion.div 
-                className="w-1/2 px-4"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Image src={projet.image} alt={projet.titre} width={500} height={300} className="rounded-lg" />
-              </motion.div>
-              <motion.div 
-                className="w-1/2 px-4"
-                initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <motion.h4 
-                  className="text-2xl font-bold text-[#073EA2] mb-2"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  {projet.titre}
-                </motion.h4>
-                <motion.div 
-                  className="w-16 h-1 bg-[#073EA2] mb-4"
-                  initial={{ width: 0 }}
-                  animate={{ width: 64 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                />
-                <motion.p 
-                  className="text-gray-600"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                >
-                  {projet.description}
-                </motion.p>
-              </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
+      <div>
+        {currentProjets.map((projet, index) => (
+          <div 
+            key={index}
+            className={`flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} items-center mb-12 ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'} p-8 rounded-lg`}
+          >
+            <div className="w-1/2 px-4">
+              <Image src={projet.image} alt={projet.titre} width={500} height={300} className="rounded-lg" />
+            </div>
+            <div className="w-1/2 px-4">
+              <h4 className="text-2xl font-bold text-[#073EA2] mb-2">
+                {projet.titre}
+              </h4>
+              <div className="w-16 h-1 bg-[#073EA2] mb-4" />
+              <p className="text-gray-600">
+                {projet.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
 
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-        className="flex justify-center mt-8"
-      >
+      <div className="flex justify-center mt-8">
         {Array.from({ length: Math.ceil(projets.length / projetsParPage) }, (_, i) => (
-          <motion.button
+          <button
             key={i}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
             onClick={() => setCurrentPage(i + 1)}
             className={`mx-1 px-3 py-1 rounded ${
               currentPage === i + 1 ? 'bg-[#073EA2] text-white' : 'bg-gray-200 text-gray-700'
             }`}
           >
             {i + 1}
-          </motion.button>
+          </button>
         ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

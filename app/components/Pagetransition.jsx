@@ -24,7 +24,7 @@ const PageTransition = ({ children }) => {
   const pageTransition = {
     type: 'tween',
     ease: 'easeInOut',
-    duration: 0.6,
+    duration: 0.5,
   };
 
   return (
