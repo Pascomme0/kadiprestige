@@ -1,7 +1,7 @@
 import React from 'react'
 import Banner from '../../components/Banner'
 import FAQSection from '@/app/components/FAQsection'
-import voyage from '../../public/KPvoyage.jpg'
+import voyage from '../../public/kpvoyage.jpg'
 import KPvoyage from '../../components/KPvoyage'
 
 const page = () => {
