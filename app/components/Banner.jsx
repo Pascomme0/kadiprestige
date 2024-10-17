@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Banner = ({ imageUrl, title }) => {
   return (
-    <div className="relative top-14 w-full h-[300px] sm:h-[500px]">
+    <div className="relative top-14 mb-16 w-full h-[300px] sm:h-[500px]">
       <Image
         src={imageUrl}
         alt={title}
