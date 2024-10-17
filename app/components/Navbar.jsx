@@ -1,14 +1,13 @@
 "use client";
 
 import logo from '../public/logo.png';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Facebook, Linkedin } from 'lucide-react';
 
-export default function SimpleModernHeader() {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const linkHoverVariants = {
@@ -27,84 +26,59 @@ export default function SimpleModernHeader() {
       transition: { duration: 0.5, ease: 'easeInOut' },
     },
   };
+
   const buttonHoverVariants = {
-    rest: { scale: 1, boxShadow: '0px 0px 0px rgba(255, 255, 255, 0)' },
+    rest: { scale: 1 },
     hover: {
       scale: 1.05,
-      boxShadow: '0px 0px 15px rgba(255, 255, 255, 0.8)',
       transition: { duration: 0.4, ease: 'easeInOut' },
     },
   };
+
+  const menuItems = ['Accueil', 'Presentation', 'Services', 'Realisation', 'Agence de voyage'];
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-white shadow-lg items-center">
-      <div className="container mx-auto px-4 items-center">
+    <header className="fixed top-0 z-50 w-full bg-white shadow-lg">
+      <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link
-          scroll={true}
-           href="/" className="flex items-center space-x-2">
-            <Image
-              src={logo}
-              alt="Logo"
-              width={40}
-              height={40}
-              className="w-24"
-            />
+          <Link href="/" className="flex items-center space-x-2">
+            <Image src={logo} alt="Logo" width={40} height={40} className="w-24" />
           </Link>
-          <nav
-            className={`${
-              isMenuOpen ? 'flex' : 'hidden'
-            } absolute left-0 right-0 top-16 flex-col items-center space-y-4 p-4 shadow-md bg-white md:static md:flex md:flex-row md:space-x-6 md:space-y-0 md:p-0 md:shadow-none text-[15px] text-gray-800`}
-          >
-            {['Accueil', 'Presentation', 'Services', 'Realisation', 'Agence de voyage'].map((item) => (
-              <motion.div
-                key={item}
-                initial="rest"
-                whileHover="hover"
-                animate="rest"
-                variants={linkHoverVariants}
-                className="relative "
-              >
-                <Link                
-                 scroll={true}
-                  href={item === 'Accueil' ? '/' : item === 'Agence de voyage' ? '../pages/agencedevoyage' : `../pages/${item.toLowerCase()}`}
+          
+          <nav className={`${isMenuOpen ? 'flex' : 'hidden'} absolute left-0 right-0 top-16 flex-col items-center space-y-4 p-4 shadow-md bg-white md:static md:flex md:flex-row md:space-x-6 md:space-y-0 md:p-0 md:shadow-none text-[15px] text-gray-800`}>
+            {menuItems.map((item) => (
+              <motion.div key={item} initial="rest" whileHover="hover" animate="rest" variants={linkHoverVariants} className="relative">
+                <Link 
+                  href={item === 'Accueil' ? '/' : item === 'Agence de voyage' ? '/agencedevoyage' : `/${item.toLowerCase()}`}
                   className="text-gray-800 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item}
                 </Link>
-                <motion.div
-                  className="absolute  h-[2px] bg-[#EA1D24]"
-                  variants={underlineVariants}
-                />
+                <motion.div className="absolute bottom-0 left-0 h-[2px] bg-[#EA1D24]" variants={underlineVariants} />
               </motion.div>
             ))}
           </nav>
 
           <div className="flex items-center space-x-4">
-            <Link href="../pages/contact">
+            <Link href="/contact">
               <motion.button
                 initial="rest"
                 whileHover="hover"
                 animate="rest"
                 variants={buttonHoverVariants}
-                className="inline-flex px-4 py-2 text-sm font-medium text-white bg-[#EA1D24] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 relative overflow-hidden"
+                className="px-4 py-2 text-sm font-medium text-white bg-[#EA1D24] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#EA1D24] transition-colors duration-200"
               >
-                <span className="relative z-10">Contact</span>
-                <motion.div
-                  className="absolute bg-[#EA1D24]"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 0.5 }}
-                  transition={{ duration: 0.4, ease: 'easeInOut' }}
-                />
+                Contact
               </motion.button>
             </Link>
 
             <button
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 md:hidden"
+              className="md:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#EA1D24]"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-6 w-6 " /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>

@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import ScrollPageIndicator from "./components/ScollPageIncdicator";
 import PageTransition from "./components/Pagetransition";
 import banner from '../app/public/banner.jpg'
-
+import WhatsAppButton from "./components/Whatsapp";
 
 export const metadata = {
   title: "Kadi Prestige",
@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Navbar />
+        <WhatsAppButton />
         <ScrollPageIndicator />
         <PageTransition>
           {children}
