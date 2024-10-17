@@ -16,7 +16,7 @@ const services = [
 
 export default function KPvoyage() {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 mt-20">
+    <div className="max-w-6xl mx-auto px-4 py-8 mt-28">
       <motion.div 
         className="flex flex-col md:flex-row gap-8 mb-12"
         initial={{ opacity: 0, y: 50 }}

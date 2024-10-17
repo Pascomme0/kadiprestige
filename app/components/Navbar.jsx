@@ -61,7 +61,7 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center space-x-4">
-            <Link href="/contact">
+            <Link href="../pages/contact">
               <motion.button
                 initial="rest"
                 whileHover="hover"

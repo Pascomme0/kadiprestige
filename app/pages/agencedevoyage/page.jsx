@@ -1,12 +1,14 @@
 import React from 'react'
 import Banner from '../../components/Banner'
-import KPvoyage from '@/app/components/KPvoyage'
 import FAQSection from '@/app/components/FAQsection'
 import banner from '../../public/banner.jpg'
+import voyage from '../../public/KPvoyage.jpg'
+import KPvoyage from '../../components/KPvoyage'
+
 const page = () => {
   return (
     <div>
-        <Banner imageUrl={banner} title="Agence de voyage" />
+        <Banner imageUrl={voyage} title={<>Agence<br />de voyage</>} />
         <KPvoyage />
         <FAQSection />
     </div>

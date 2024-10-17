@@ -1,19 +1,20 @@
 "use client";
 
-import { Share2 } from 'lucide-react'
+import { Share2, Scissors, Shirt, Truck, Droplet, Building2, Factory, Brush, HardHat, Printer } from 'lucide-react'
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Services() {
   const services = [
-    { title: 'Creation de mode', description: 'Nous confectionnons des vêtements personnalisés pour votre compte' },
-    { title: 'Creation de mode', description: 'Nous confectionnons des vêtements personnalisés pour votre compte' },
-    { title: 'Creation de mode', description: 'Nous confectionnons des vêtements personnalisés pour votre compte' },
-    { title: 'Creation de mode', description: 'Nous confectionnons des vêtements personnalisés pour votre compte' },
-    { title: 'Creation de mode', description: 'Nous confectionnons des vêtements personnalisés pour votre compte' },
-    { title: 'Creation de mode', description: 'Nous confectionnons des vêtements personnalisés pour votre compte' },
-    { title: 'Creation de mode', description: 'Nous confectionnons des vêtements personnalisés pour votre compte' },
-    { title: 'Creation de mode', description: 'Nous confectionnons des vêtements personnalisés pour votre compte' },
-    { title: 'Creation de mode', description: 'Nous confectionnons des vêtements personnalisés pour votre compte' },
+    {icon: Scissors, title: 'Création de mode', description: 'Conception et réalisation de collections uniques et tendance pour tous les styles', link: '../pages/servicedetails/mode' },
+    {icon: Shirt, title: 'Confection de tenue de travail', description: 'Fabrication sur mesure de vêtements professionnels adaptés à chaque métier', link: '/services/confection-tenue-travail' },
+    {icon: Truck, title: 'Livraison de denrées alimentaires', description: 'Service de livraison rapide et fiable de produits alimentaires frais et de qualité', link: '/services/livraison-denrees-alimentaires' },
+    {icon: Droplet, title: 'Drainage et Hydraulique', description: 'Solutions expertes pour la gestion des eaux et l\'optimisation des systèmes hydrauliques', link: '/services/drainage-hydraulique' },
+    {icon: Building2, title: 'BTP', description: 'Réalisation de projets de construction et de rénovation dans le respect des normes et délais', link: '/services/btp' },
+    {icon: Factory, title: 'Industrie', description: 'Services et solutions innovantes pour optimiser les processus industriels', link: '/services/industrie' },
+    {icon: Brush, title: 'Entretien, Nettoyage,Aménagement de bureaux et espaces verts', description: 'Maintenance complète pour des espaces de travail propres, fonctionnels et agréables', link: '/services/entretien-nettoyage-amenagement' },
+    {icon: HardHat, title: 'Fourniture d\'équipement de protection individuelle (EPI)', description: 'Gamme complète d\'EPI pour assurer la sécurité et le confort des travailleurs', link: '/services/fourniture-epi' },
+    {icon: Printer, title: 'Fourniture de matériel de bureau et consommables informatiques', description: 'Approvisionnement en fournitures et équipements essentiels pour un bureau efficace', link: '/services/fourniture-materiel-bureau' },
   ]
 
   return (
@@ -37,17 +38,19 @@ export default function Services() {
         </motion.h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div 
-              key={index} 
-              className="border border-blue-600 p-6 rounded-lg"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Share2 className="text-[#EA1D24] w-8 h-8 mb-4" />
-              <h4 className="text-[#073EA2] font-semibold text-lg mb-2">{service.title}</h4>
-              <p className="text-gray-600 text-[17px]">{service.description}</p>
-            </motion.div>
+            <Link href={service.link} key={index}>
+              <motion.div 
+                className="border border-blue-600 p-6 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -10 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <service.icon className="text-[#EA1D24] w-8 h-8 mb-4" />
+                <h4 className="text-[#073EA2] font-semibold text-lg mb-2">{service.title}</h4>
+                <p className="text-gray-600 text-[17px]">{service.description}</p>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>
