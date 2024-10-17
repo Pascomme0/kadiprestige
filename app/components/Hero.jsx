@@ -3,21 +3,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import banner1 from '../public/materiauxx.jpg'; // Replace with your actual images
+import banner1 from '../public/materiauxx.jpg'; 
 import banner2 from '../public/mode.jpg';
 import banner3 from '../public/kpvoyage.jpg';
 
 const images = [banner1, banner2, banner3];
 const texts = [
-  "Discover the beauty of the outdoors",
-  "Experience the serenity of nature",
-  "Unleash your inner explorer"
+  [<> Lorem ipsum <br />  dolor sit amet</>],
+  [<> Lorem ipsum <br />  dolor sit amet</>],
+  [<> Lorem ipsum <br />  dolor sit amet</>],
 ];
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-advance carousel every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
@@ -47,6 +46,16 @@ const Hero = () => {
                   objectFit="cover"
                   objectPosition="center"
                 />
+                <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+                  <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-white text-4xl md:text-6xl font-bold text-center leading-10 px-4">
+                    {texts[index]}
+                  </motion.h2>
+                </div>
               </motion.div>
             )
           ))}
@@ -55,4 +64,5 @@ const Hero = () => {
     </div>
   );
 };
+
 export default Hero;
