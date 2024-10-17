@@ -49,7 +49,7 @@ export default function Navbar() {
             {menuItems.map((item) => (
               <motion.div key={item} initial="rest" whileHover="hover" animate="rest" variants={linkHoverVariants} className="relative">
                 <Link 
-                  href={item === 'Accueil' ? '/' : item === 'Agence de voyage' ? '/agencedevoyage' : `/${item.toLowerCase()}`}
+                  href={item === 'Accueil' ? '/' : item === 'Agence de voyage' ? '/pages/agencedevoyage' : `/pages/${item.toLowerCase()}`}
                   className="text-gray-800 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >

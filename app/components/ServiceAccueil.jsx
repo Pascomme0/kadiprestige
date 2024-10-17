@@ -4,15 +4,15 @@ import { motion } from 'framer-motion';
 
 export default function ServicesAccueil() {
     const services = [
-      { id: '01', title: 'Création de mode', description: 'lorem ipsum de vêtements pour les travailleurs' },
-      { id: '02', title: 'Création de mode', description: 'lorem ipsum de vêtements pour les travailleurs' },
-      { id: '03', title: 'Création de mode', description: 'lorem ipsum de vêtements pour les travailleurs' },
-      { id: '04', title: 'Création de mode', description: 'lorem ipsum de vêtements pour les travailleurs' },
-      { id: '05', title: 'Création de mode', description: 'lorem ipsum de vêtements pour les travailleurs' },
-      { id: '06', title: 'Création de mode', description: 'lorem ipsum de vêtements pour les travailleurs' },
-      { id: '07', title: 'Création de mode', description: 'lorem ipsum de vêtements pour les travailleurs' },
-      { id: '08', title: 'Création de mode', description: 'lorem ipsum de vêtements pour les travailleurs' },
-      { id: '09', title: 'Création de mode', description: 'lorem ipsum de vêtements pour les travailleurs' },
+      { id: '01', title: 'Création de mode', description: 'Conception et réalisation de collections uniques et tendance pour tous les styles' },
+      { id: '02', title: 'Confection de tenue de travail', description: 'Fabrication sur mesure de vêtements professionnels adaptés à chaque métier' },
+      { id: '03', title: 'Livraison de denrées alimentaires', description: 'Service de livraison rapide et fiable de produits alimentaires frais et de qualité' },
+      { id: '04', title: 'Drainage et Hydraulique', description: 'Solutions expertes pour la gestion des eaux et l\'optimisation des systèmes hydrauliques' },
+      { id: '05', title: 'BTP', description: 'Réalisation de projets de construction et de rénovation dans le respect des normes et délais' },
+      { id: '06', title: 'Industrie', description: 'Services et solutions innovantes pour optimiser les processus industriels' },
+      { id: '07', title: 'Entretien, Nettoyage,Aménagement de bureaux et espaces verts', description: 'Maintenance complète pour des espaces de travail propres, fonctionnels et agréables' },
+      { id: '08', title: 'Fourniture d\'équipement de protection individuelle (EPI)', description: 'Gamme complète d\'EPI pour assurer la sécurité et le confort des travailleurs' },
+      { id: '09', title: 'Fourniture de matériel de bureau et consommables informatiques', description: 'Approvisionnement en fournitures et équipements essentiels pour un bureau efficace' },
     ]
   
     return (

@@ -1,14 +1,11 @@
 "use client"
 
 import { useState } from 'react'
-import { MessageSquare } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { useMediaQuery } from 'react-responsive'
 
 export default function FAQSection() {
   const [openQuestion, setOpenQuestion] = useState(0)
-  const isMobile = useMediaQuery({ maxWidth: 768 })
 
   const faqData = [
     {
@@ -37,73 +34,60 @@ export default function FAQSection() {
       transition={{ duration: 0.5 }}
     >
       <div className="max-w-4xl mx-auto">
-        <div className={`flex ${isMobile ? 'flex-col' : 'justify-between items-start'}`}>
-          <motion.div 
-            className={isMobile ? 'w-full' : 'w-2/3 pr-8'}
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h2 className="text-3xl font-bold mb-2">Vous avez quelques questions ?</h2>
-            <p className="text-gray-600 mb-8">Voici quelques questions fréquemment posées</p>
-            
-            <div className="space-y-4">
-              {faqData.map((faq, index) => (
-                <motion.div 
-                  key={index} 
-                  className="border-b border-gray-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                >
-                  <button
-                    className="flex justify-between items-center w-full py-4 text-left"
-                    onClick={() => setOpenQuestion(openQuestion === index ? -1 : index)}
-                    aria-expanded={openQuestion === index}
-                  >
-                    <span className="text-blue-700 text-[17px] font-medium">{faq.question}</span>
-                    <span className="text-2xl transition-transform duration-300" style={{
-                      transform: openQuestion === index ? 'rotate(45deg)' : 'rotate(0deg)'
-                    }}>
-                      +
-                    </span>
-                  </button>
-                  <motion.div 
-                    className="overflow-hidden"
-                    initial={{ height: 0 }}
-                    animate={{ height: openQuestion === index ? 'auto' : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <p className="pb-4 text-gray-600">{faq.answer}</p>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h2 className="text-3xl font-bold mb-2 text-center">Vous avez quelques questions ?</h2>
+          <p className="text-gray-600 mb-8 text-center">Voici quelques questions fréquemment posées</p>
+        </motion.div>
+        
+        <div className="space-y-4">
+          {faqData.map((faq, index) => (
             <motion.div 
-              className="flex justify-center mt-8"
+              key={index} 
+              className="border-b border-gray-300"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.5 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              <Link href="../pages/contact">
-                <button className="bg-[#EA1D24] text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors">
-                  J'ai une question
-                </button>
-              </Link>
+              <button
+                className="flex justify-between items-center w-full py-4 text-left"
+                onClick={() => setOpenQuestion(openQuestion === index ? -1 : index)}
+                aria-expanded={openQuestion === index}
+              >
+                <span className="text-blue-700 text-[17px] font-medium">{faq.question}</span>
+                <span className="text-2xl transition-transform duration-300" style={{
+                  transform: openQuestion === index ? 'rotate(45deg)' : 'rotate(0deg)'
+                }}>
+                  +
+                </span>
+              </button>
+              <motion.div 
+                className="overflow-hidden"
+                initial={{ height: 0 }}
+                animate={{ height: openQuestion === index ? 'auto' : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <p className="pb-4 text-gray-600">{faq.answer}</p>
+              </motion.div>
             </motion.div>
-          </motion.div>        
-          {!isMobile && (
-            <motion.div 
-              className="w-1/3 flex justify-center"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <MessageSquare className="w-40 h-40 mt-28 text-gray-400" />
-            </motion.div>
-          )}
+          ))}
         </div>
+
+        <motion.div 
+          className="flex justify-center mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.5 }}
+        >
+          <Link href="../pages/contact">
+            <button className="bg-[#EA1D24] text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors">
+              J'ai une question
+            </button>
+          </Link>
+        </motion.div>
       </div>
     </motion.div>
   )
