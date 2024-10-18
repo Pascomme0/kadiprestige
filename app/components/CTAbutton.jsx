@@ -10,7 +10,7 @@ const CTAButton = () => {
 
   return (
     <motion.div 
-      className="relative bg-red-600 p-8 rounded-lg overflow-hidden h-64 w-full max-w-4xl mx-auto my-24 flex items-center justify-center"
+      className="relative bg-gradient-to-r from-[#073ea2] to-[#ea1d24] p-8 rounded-lg overflow-hidden h-64 w-full max-w-4xl mx-auto my-24 flex items-center justify-center"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -38,7 +38,7 @@ const CTAButton = () => {
         </motion.h2>
         <Link href="../pages/contact">
           <motion.button 
-            className={`bg-white text-[#042A70] font-semibold py-3 px-6 rounded-lg transition duration-300 ${isHovered ? 'bg-gray-100 transform scale-105' : ''}`}
+            className={`bg-white text-[#073ea2] font-semibold py-3 px-6 rounded-lg transition duration-300 ${isHovered ? 'bg-[#ea1d24] text-white transform scale-105' : ''}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             whileHover={{ scale: 1.05 }}

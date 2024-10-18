@@ -2,47 +2,54 @@
 
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import Image from 'next/image';
 
-const testimonials = [
+const temoignages = [
   {
-    quote: "Impressionné par le professionnalisme et l'attention aux détails.",
-    author: "Clarisse Molou",
-    role: "@spaceX"
+    citation: "Kadi Prestige a réalisé un forage d'eau potable pour notre village. Leur expertise technique et leur professionnalisme sont remarquables.",
+    auteur: "Amadou Koné",
+    role: "Chef de village"
   },
   {
-    quote: "Une expérience fluide du début à la fin. Je recommande vivement !",
-    author: "Kara Lionnel",
-    role: "@google"
+    citation: "Grâce à Kadi Prestige, notre école a maintenant accès à l'eau potable. Leur travail a considérablement amélioré les conditions d'hygiène pour nos élèves.",
+    auteur: "Mariam Diallo",
+    role: "Directrice d'école"
   },
   {
-    quote: "Fiable et digne de confiance. A rendu ma vie tellement plus facile !",
-    author: "Jane Michael",
-    role: "@amazon"
+    citation: "Le service de canalisation de Kadi Prestige est exceptionnel. Ils ont effectué le raccordement au réseau SODECI rapidement et efficacement.",
+    auteur: "Yves Kouassi",
+    role: "Propriétaire immobilier"
   },
   {
-    quote: "Impressionné par le professionnalisme et l'attention aux détails.",
-    author: "Guy Demel",
-    role: "@spaceX"
+    citation: "La qualité de l'eau 'Kadi Prestige' est excellente. Nous sommes ravis de l'utiliser dans notre restaurant.",
+    auteur: "Fatou Bamba",
+    role: "Restauratrice"
   },
   {
-    quote: "Une expérience fluide du début à la fin. Je recommande vivement !",
-    author: "Kara Lynn",
-    role: "@google"
-  }
+    citation: "Les uniformes confectionnés par Kadi Prestige sont de haute qualité et parfaitement adaptés à nos besoins. Un service client impeccable.",
+    auteur: "Luc Koffi",
+    role: "Directeur des ressources humaines"
+  },
+  {
+    citation: "L'ONG de Kadi Prestige a transformé la vie de nombreuses femmes dans notre communauté grâce à leurs programmes d'autonomisation. Leur engagement est inspirant.",
+    auteur: "Aya Touré",
+    role: "Bénéficiaire du programme d'autonomisation"
+  },
 ];
 
-const Testimonial = () => {
+const Temoignage = () => {
   return (
-    <section className="py-16 my-24 bg-gray-200">
+    <section className="py-16 my-24 bg-gradient-to-r from-[#073ea2] to-[#ea1d24] text-white">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-center text-2xl font-bold text-[#073EA2] mb-2">Expériences Client Transformatives</h2>
-      <p className="text-center text-lg text-gray-600 mb-12">Ils témoignent de notre professionnalisme et de notre expertise</p>
+        <h2 className="text-center text-3xl font-bold mb-2">Ce que disent nos clients</h2>
+        <p className="text-center text-lg text-gray-200 mb-12">L'excellence au service de vos besoins en eau et bien plus</p>
         
         <Swiper
-          modules={[Autoplay]}
+          modules={[Autoplay, Navigation, Pagination]}
           spaceBetween={30}
           slidesPerView={1}
           autoplay={{ delay: 4000 }}
@@ -55,15 +62,14 @@ const Testimonial = () => {
             },
           }}
         >
-          {testimonials.map((testimonial, index) => (
+          {temoignages.map((temoignage, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-white p-6 rounded-lg shadow-xl">
-                <blockquote className="text-gray-600 mb-4">"{testimonial.quote}"</blockquote>
-                <div className="flex items-center">
-              
+              <div className="bg-white bg-opacity-10 p-6 rounded-lg shadow-xl h-full flex flex-col backdrop-blur-sm">
+                <blockquote className="text-white mb-4 flex-grow">"{temoignage.citation}"</blockquote>
+                <div className="flex items-center mt-4">
                   <div>
-                    <p className="font-semibold text-gray-900">{testimonial.author}</p>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                    <p className="font-semibold text-white">{temoignage.auteur}</p>
+                    <p className="text-sm text-gray-200">{temoignage.role}</p>
                   </div>
                 </div>
               </div>
@@ -75,4 +81,4 @@ const Testimonial = () => {
   );
 };
 
-export default Testimonial;
+export default Temoignage;

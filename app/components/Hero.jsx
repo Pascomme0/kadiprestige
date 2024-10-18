@@ -1,66 +1,90 @@
 "use client"; // Ensure this is a Client Component
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { gsap } from 'gsap';
 import banner1 from '../public/materiauxx.jpg'; 
 import banner2 from '../public/mode.jpg';
 import banner3 from '../public/kpvoyage.jpg';
 
 const images = [banner1, banner2, banner3];
 const texts = [
-  [<> Lorem ipsum <br />  dolor sit amet</>],
-  [<> Lorem ipsum <br />  dolor sit amet</>],
-  [<> Lorem ipsum <br />  dolor sit amet</>],
+  "Lorem ipsum dolor sit amet",
+  "Consectetur adipiscing elit",
+  "Sed do eiusmod tempor incididunt",
 ];
 
 const Hero = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef(null);
+  const textRef = useRef(null);
+  const slicesRef = useRef([]);
+  const overlayRef = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000);
-    return () => clearInterval(interval);
+    const container = containerRef.current;
+    const textElement = textRef.current;
+    const slices = slicesRef.current;
+    const overlay = overlayRef.current;
+
+    const tl = gsap.timeline({ repeat: -1 });
+
+    images.forEach((image, index) => {
+      const nextIndex = (index + 1) % images.length;
+      
+      tl.set(slices, { backgroundImage: `url(${image.src})` })
+        .fromTo(slices, 
+          { x: (i) => i % 2 === 0 ? -100 : 100, opacity: 0 },
+          { x: 0, opacity: 1, stagger: 0.05, duration: 1, ease: "power2.out" }
+        )
+        .fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.5 }, "<")
+        .fromTo(textElement,
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, ease: "power2.out", onStart: () => {
+            textElement.textContent = texts[index];
+          }}
+        )
+        .to({}, { duration: 2 }) // Pause
+        .to(textElement, { y: -50, opacity: 0, duration: 0.5, ease: "power2.in" })
+        .to(overlay, { opacity: 0, duration: 0.5 }, "<")
+        .to(slices, { 
+          x: (i) => i % 2 === 0 ? -100 : 100, 
+          opacity: 0, 
+          stagger: 0.05, 
+          duration: 1, 
+          ease: "power2.in"
+        });
+    });
+
+    return () => tl.kill();
   }, []);
 
   return (
-    <div className="relative top-16 mb-10 h-screen bg-gray-100 overflow-hidden">
-      <div className="absolute inset-0">
-        <AnimatePresence>
-          {images.map((image, index) => (
-            index === currentIndex && (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: 60, scale: 0.90 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: -100, scale: 0.95 }}
-                transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
-                className="absolute inset-0">
-                <Image
-                  src={image}
-                  alt={`Slide ${index + 1}`}
-                  layout="fill"
-                  objectFit="cover"
-                  objectPosition="center"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
-                  <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-white text-4xl md:text-6xl font-bold text-center leading-10 px-4">
-                    {texts[index]}
-                  </motion.h2>
-                </div>
-              </motion.div>
-            )
-          ))}
-        </AnimatePresence>
-      </div>      
+    <div className="relative top-16 mb-10 h-screen overflow-hidden">
+      <div ref={containerRef} className="absolute inset-0">
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={i}
+            ref={(el) => slicesRef.current[i] = el}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              clipPath: `inset(${i * 10}% 0 ${90 - i * 10}% 0)`,
+              zIndex: i + 1
+            }}
+          />
+        ))}
+        <div 
+          ref={overlayRef}
+          className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+          style={{ opacity: 0, zIndex: 11 }}
+        >
+          <h2
+            ref={textRef}
+            className="text-white text-4xl md:text-6xl font-bold text-center leading-10 px-4"
+          >
+            {texts[0]}
+          </h2>
+        </div>
+      </div>
     </div>
   );
 };

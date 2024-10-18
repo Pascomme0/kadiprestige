@@ -7,14 +7,14 @@ import Link from 'next/link';
 export default function Services() {
   const services = [
     {icon: Scissors, title: 'Création de mode', description: 'Conception et réalisation de collections uniques et tendance pour tous les styles', link: '../pages/servicedetails/mode' },
-    {icon: Shirt, title: 'Confection de tenue de travail', description: 'Fabrication sur mesure de vêtements professionnels adaptés à chaque métier', link: '/services/confection-tenue-travail' },
-    {icon: Truck, title: 'Livraison de denrées alimentaires', description: 'Service de livraison rapide et fiable de produits alimentaires frais et de qualité', link: '/services/livraison-denrees-alimentaires' },
-    {icon: Droplet, title: 'Drainage et Hydraulique', description: 'Solutions expertes pour la gestion des eaux et l\'optimisation des systèmes hydrauliques', link: '/services/drainage-hydraulique' },
-    {icon: Building2, title: 'BTP', description: 'Réalisation de projets de construction et de rénovation dans le respect des normes et délais', link: '/services/btp' },
-    {icon: Factory, title: 'Industrie', description: 'Services et solutions innovantes pour optimiser les processus industriels', link: '/services/industrie' },
-    {icon: Brush, title: 'Entretien, Nettoyage,Aménagement de bureaux et espaces verts', description: 'Maintenance complète pour des espaces de travail propres, fonctionnels et agréables', link: '/services/entretien-nettoyage-amenagement' },
-    {icon: HardHat, title: 'Fourniture d\'équipement de protection individuelle (EPI)', description: 'Gamme complète d\'EPI pour assurer la sécurité et le confort des travailleurs', link: '/services/fourniture-epi' },
-    {icon: Printer, title: 'Fourniture de matériel de bureau et consommables informatiques', description: 'Approvisionnement en fournitures et équipements essentiels pour un bureau efficace', link: '/services/fourniture-materiel-bureau' },
+    {icon: Shirt, title: 'Confection de tenue de travail', description: 'Fabrication sur mesure de vêtements professionnels adaptés à chaque métier', link: '../pages/servicedetails/tenue' },
+    {icon: Truck, title: 'Livraison de denrées alimentaires', description: 'Service de livraison rapide et fiable de produits alimentaires frais et de qualité', link: '../pages/servicedetails/livraisondenree' },
+    {icon: Droplet, title: 'Drainage et Hydraulique', description: 'Solutions expertes pour la gestion des eaux et l\'optimisation des systèmes hydrauliques', link: '../pages/servicedetails/drainage' },
+    {icon: Building2, title: 'BTP', description: 'Réalisation de projets de construction et de rénovation dans le respect des normes et délais', link: '../pages/servicedetails/btp' },
+    {icon: Factory, title: 'Industrie', description: 'Services et solutions innovantes pour optimiser les processus industriels', link: '../pages/servicedetails/industrie' },
+    {icon: Brush, title: 'Entretien, Nettoyage,Aménagement de bureaux et espaces verts', description: 'Maintenance complète pour des espaces de travail propres, fonctionnels et agréables', link: '../pages/servicedetails/entretien' },
+    {icon: HardHat, title: 'Fourniture d\'équipement de protection individuelle (EPI)', description: 'Gamme complète d\'EPI pour assurer la sécurité et le confort des travailleurs', link: '../pages/servicedetails/epi' },
+    {icon: Printer, title: 'Fourniture de matériel de bureau et consommables informatiques', description: 'Approvisionnement en fournitures et équipements essentiels pour un bureau efficace', link: '../pages/servicedetails/bureau' },
   ]
 
   return (
