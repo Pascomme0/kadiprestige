@@ -7,15 +7,6 @@ import { motion } from 'framer-motion';
 const Detailservice = ({ titre, description, imageUrl, couleurFond }) => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
-      <motion.h2 
-        className="text-2xl font-bold text-center mb-12 mt-14 text-blue-700"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        {titre}
-      </motion.h2>
-      
       <div className="flex flex-col md:flex-row items-center justify-between gap-12">
         <motion.div 
           className="md:w-1/2"
@@ -23,7 +14,15 @@ const Detailservice = ({ titre, description, imageUrl, couleurFond }) => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <p className="text-gray-700 text-lg leading-relaxed text-justify">{description}</p>
+          <motion.h2 
+            className="text-4xl font-bold mb-6 text-blue-700"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {titre}
+          </motion.h2>
+          <p className="text-gray-700 text-[17px] font-light leading-relaxed text-justify">{description}</p>
         </motion.div>
         
         <motion.div 

@@ -29,7 +29,7 @@ const Banner = ({ imageUrl, title }) => {
   }, []);
 
   return (
-    <div ref={bannerRef} className="relative top-14 mb-16 w-full h-[300px] sm:h-[500px]">
+    <div ref={bannerRef} className="relative top-14 mb-16 w-full h-[300px] sm:h-[500px] overflow-hidden">
       <div ref={imageRef} className="absolute inset-0">
         <Image
           src={imageUrl}
@@ -38,7 +38,7 @@ const Banner = ({ imageUrl, title }) => {
           objectFit="cover"
         />
       </div>
-      <div ref={overlayRef} className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div ref={overlayRef} className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
         <h1 ref={titleRef} className="text-white text-2xl sm:text-7xl font-bold text-center px-4">{title}</h1>
       </div>
     </div>

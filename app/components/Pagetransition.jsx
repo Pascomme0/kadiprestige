@@ -9,26 +9,21 @@ const PageTransition = ({ children }) => {
   const pageVariants = {
     initial: {
       opacity: 0,
-      y: '-10%',
     },
     in: {
       opacity: 1,
-      y: 0,
     },
     out: {
       opacity: 0,
-      y: '100%',
     },
   };
 
   const pageTransition = {
-    type: 'tween',
-    ease: 'easeInOut',
-    duration: 0.5,
+    duration: 0.3,
   };
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={pathname}
         initial="initial"

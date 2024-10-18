@@ -38,10 +38,10 @@ const CTAButton = () => {
         </motion.h2>
         <Link href="../pages/contact">
           <motion.button 
-            className={`bg-white text-[#073ea2] font-semibold py-3 px-6 rounded-lg transition duration-300 ${isHovered ? 'bg-[#ea1d24] text-white transform scale-105' : ''}`}
+            className={`bg-white text-[#073ea2] font-semibold py-3 px-6 rounded-lg transition duration-300 ${isHovered ? 'bg-white text-[#073ea2] transform scale-105' : ''}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.95 }}
           >
             {isHovered ? 'Parlons-en !' : 'Contacter'}

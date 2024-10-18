@@ -9,9 +9,9 @@ import banner3 from '../public/kpvoyage.jpg';
 
 const images = [banner1, banner2, banner3];
 const texts = [
-  "Lorem ipsum dolor sit amet",
-  "Consectetur adipiscing elit",
-  "Sed do eiusmod tempor incididunt",
+  "Votre partenaire de confiance pour tous vos besoins professionnels",
+  "Des solutions sur mesure pour votre entreprise",
+  "Qualité, innovation et service à votre portée",
 ];
 
 const Hero = () => {
@@ -74,7 +74,7 @@ const Hero = () => {
         ))}
         <div 
           ref={overlayRef}
-          className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+          className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center"
           style={{ opacity: 0, zIndex: 11 }}
         >
           <h2

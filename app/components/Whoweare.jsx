@@ -57,7 +57,6 @@ const Whoweare = () => {
               <br/>
               • Confection de tenues et uniformes de travail
               <br/><br/>
-              De plus, notre ONG œuvre pour l'autonomisation des femmes et l'assistance aux personnes démunies, offrant soutien, dons et aide à l'insertion professionnelle.
             </motion.p>
           </div>
         </motion.div>
