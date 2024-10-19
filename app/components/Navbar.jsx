@@ -42,7 +42,15 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src={logo} alt="Logo" width={40} height={40} className="w-24" />
+            <Image 
+              src={logo} 
+              alt="Logo" 
+              width={96} 
+              height={96} 
+              className="w-24 h-auto" 
+              priority
+              quality={100}
+            />
           </Link>
           
           <nav className={`${isMenuOpen ? 'flex' : 'hidden'} absolute left-0 right-0 top-16 flex-col items-center space-y-4 p-4 shadow-md bg-white md:static md:flex md:flex-row md:space-x-6 md:space-y-0 md:p-0 md:shadow-none text-[15px] text-gray-800`}>
