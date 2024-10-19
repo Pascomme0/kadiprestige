@@ -35,7 +35,6 @@ const projets = [
     description: "Mise en place d'un système d'énergie solaire pour alimenter les bâtiments publics de Daloa. Cette initiative a réduit la dépendance aux énergies fossiles et diminué les coûts énergétiques de la municipalité de 40%.",
     image: voyage
   },
-  // Ajoutez d'autres projets ici
 ];
 
 export default function Realisation() {

@@ -4,7 +4,6 @@ import Partenaire from './components/Partenaire'
 import Testimonial from './components/Testimonial'
 import Banner from './components/Banner'
 import CTAbutton from './components/CTAbutton'
-import banner from '../app/public/voyage.png'
 import Blog from './components/Blog'
 import Services from './components/Services'
 import Hero from './components/Hero'
@@ -15,7 +14,7 @@ const page = () => {
 
   return (
     <div>
-        <Hero />
+      <Hero />
       <Whoweare />
       <Services />
       <Partenaire />

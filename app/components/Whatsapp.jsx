@@ -5,11 +5,11 @@ import { FaWhatsapp } from 'react-icons/fa';
 
 const floatingVariants = {
   animate: {
-    y: [0, -20, 0], // Déplacement vertical de 0 à -20px puis retour à 0
+    y: [0, -20, 0],
     transition: {
-      duration: 3, // Durée de l'animation
-      repeat: Infinity, // Répète à l'infini
-      repeatType: "loop", // L'animation recommence en boucle
+      duration: 3, 
+      repeat: Infinity, 
+      repeatType: "loop", 
     },
   },
 };
@@ -17,7 +17,7 @@ const floatingVariants = {
 const WhatsAppButton = () => {
   return (
     <motion.a
-      href="https://wa.me/+2250584583936" 
+      href="https://wa.me/+2250767413645" 
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition duration-300"

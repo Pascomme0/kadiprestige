@@ -10,7 +10,9 @@ const Footer = () => {
     <footer className="bg-[#052869] text-white py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+
           {/* Logo et adresse */}
+
           <div>
             <Image src={logo} alt="Kadi Prestige Logo" width={150} height={50} />
             <p className="mt-4">
@@ -20,6 +22,7 @@ const Footer = () => {
           </div>
 
           {/* Liens utiles */}
+
           <div>
             <h3 className="font-bold mb-4">Liens utiles</h3>
             <ul>
@@ -37,6 +40,7 @@ const Footer = () => {
           </div>
 
           {/* Contacts */}
+
           <div>
             <h3 className="font-bold mb-4">Contacts</h3>
             <ul>
@@ -47,6 +51,7 @@ const Footer = () => {
           </div>
 
           {/* Réseaux sociaux */}
+          
           <div>
             <h3 className="font-bold mb-4">Nos réseaux</h3>
             <div className="flex space-x-4">

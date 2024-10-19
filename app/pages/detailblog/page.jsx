@@ -13,10 +13,6 @@ const DetailBlogPage = () => {
       
       <article className="mt-8">
         <h1 className="text-3xl font-bold text-[#073EA2] mb-4">L'importance de l'eau potable dans le développement durable</h1>
-        
-        <div className="mb-4 text-gray-600">
-          <span>Publié le 20 Juillet 2023</span> | <span>Par Kouassi Aya</span>
-        </div>
 
         <div className="prose max-w-none">
           <p>
