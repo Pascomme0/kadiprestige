@@ -1,12 +1,12 @@
 import React from 'react'
 import Banner from '../../components/Banner'
 import Services from '../../components/Services'
-import banner from '../../public/kpvoyage.jpg'
+import service from '../../public/service.jpg'
 
 const page = () => {
   return (
     <div>
-      <Banner imageUrl={banner} title="Services" />
+      <Banner imageUrl={service} title="Services" />
       <Services />
     </div>
   )

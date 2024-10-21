@@ -1,8 +1,9 @@
 "use client"; // Ensure this is a Client Component
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import banner1 from '../public/materiauxx.jpg'; 
 import banner2 from '../public/mode.jpg';
 import banner3 from '../public/kpvoyage.jpg';
@@ -21,6 +22,8 @@ const Hero = () => {
   const overlayRef = useRef(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
     const container = containerRef.current;
     const textElement = textRef.current;
     const slices = slicesRef.current;
@@ -55,7 +58,34 @@ const Hero = () => {
         });
     });
 
-    return () => tl.kill();
+    // Effet de parallaxe
+    gsap.to(container, {
+      y: '30%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: container,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    // Effet de parallaxe pour le texte
+    gsap.to(textElement, {
+      y: '50%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: container,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    return () => {
+      tl.kill();
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    };
   }, []);
 
   return (

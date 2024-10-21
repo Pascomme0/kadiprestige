@@ -75,7 +75,7 @@ export default function Navbar() {
                 whileHover="hover"
                 animate="rest"
                 variants={buttonHoverVariants}
-                className="px-4 py-2 text-sm font-medium text-white bg-[#EA1D24] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#EA1D24] transition-colors duration-200"
+                className="px-4 py-2 text-sm font-medium text-white bg-[#EA1D24] rounded-md focus:outline-none transition-colors duration-200"
               >
                 Contact
               </motion.button>

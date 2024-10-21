@@ -5,11 +5,12 @@ import Pourquoi from '@/app/components/Pourquoi'
 import banner from '../../public/kpvoyage.jpg'
 import CEOword from '@/app/components/CEOword'
 import Services from '@/app/components/Services'
+import presentation from '../../public/presentation.jpg'
 
 const Present = () => {
   return (
     <div>
-      <Banner imageUrl={banner} title="Présentation" />
+      <Banner imageUrl={presentation} title="Présentation" />
       <Presentation />
       <Pourquoi />
       <Services />

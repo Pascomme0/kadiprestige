@@ -1,10 +1,36 @@
 "use client";
 
+import { useEffect, useRef } from 'react';
 import { Share2, Scissors, Shirt, Truck, Droplet, Building2, Factory, Brush, HardHat, Printer } from 'lucide-react'
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Services() {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    
+    gsap.fromTo(section.querySelector('.parallax-bg'), {
+      backgroundPositionY: '0px',
+    }, {
+      backgroundPositionY: '100px',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      }
+    });
+
+    // ... le reste du code des services ...
+  }, []);
+
   const services = [
     {icon: Scissors, title: 'Création de mode', description: 'Conception et réalisation de collections uniques et tendance pour tous les styles', link: '../pages/servicedetails/mode' },
     {icon: Shirt, title: 'Confection de tenue de travail', description: 'Fabrication sur mesure de vêtements professionnels adaptés à chaque métier', link: '../pages/servicedetails/tenue' },
@@ -18,8 +44,9 @@ export default function Services() {
   ]
 
   return (
-    <section className="py-16 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section ref={sectionRef} className="py-16 px-4 relative overflow-hidden">
+      <div className="parallax-bg absolute inset-0 bg-gradient-to-b from-blue-100 to-white z-0" style={{ backgroundImage: 'url(/path/to/your/background-image.jpg)' }}></div>
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.h2 
           className="text-center mb-2"
           initial={{ opacity: 0, y: -20 }}
