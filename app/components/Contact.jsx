@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import voyage from '../public/voyage.png'
 import { useMediaQuery } from 'react-responsive';
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Contact() {
   const [focusedInput, setFocusedInput] = useState(null);
@@ -16,6 +17,8 @@ export default function Contact() {
     message: ''
   });
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const recaptchaRef = useRef(null);
 
   const handleFocus = (inputName) => {
     setFocusedInput(inputName);
@@ -33,10 +36,15 @@ export default function Contact() {
     }));
   };
 
+  const handleCaptchaChange = (value) => {
+    setCaptchaToken(value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (Object.values(formData).every(field => field.trim() !== '')) {
+    if (Object.values(formData).every(field => field.trim() !== '') && captchaToken) {
       console.log('Informations du formulaire:', formData);
+      console.log('Token reCAPTCHA:', captchaToken);
       
       setFormData({
         nom: '',
@@ -50,8 +58,11 @@ export default function Contact() {
       setTimeout(() => {
         setMessageSent(false);
       }, 3000);
+
+      recaptchaRef.current.reset();
+      setCaptchaToken(null);
     } else {
-      alert('Veuillez remplir tous les champs du formulaire.');
+      alert('Veuillez remplir tous les champs du formulaire et vérifier le reCAPTCHA.');
     }
   };
 
@@ -138,9 +149,17 @@ export default function Contact() {
               onBlur={handleBlur}
               required
             ></textarea>
+            
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey="6Ldt4msqAAAAAARK7SzSjbpqw1OAkzU7ID7HoDuK"
+              onChange={handleCaptchaChange}
+            />
+            
             <button 
               type="submit" 
-              className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition-colors"
+              className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition-colors mt-4"
+              disabled={!captchaToken}
             >
               Envoyer
             </button>
