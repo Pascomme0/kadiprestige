@@ -46,21 +46,44 @@ export default function Contact() {
       console.log('Informations du formulaire:', formData);
       console.log('Token reCAPTCHA:', captchaToken);
       
-      setFormData({
-        nom: '',
-        prenom: '',
-        email: '',
-        message: ''
+      // Envoi des données à l'API
+      fetch('https://admin.kadiprestige.com/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          fullName: `${formData.prenom} ${formData.nom}`,
+          content: formData.message,
+        }),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur lors de l\'envoi des données');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Réponse de l\'API:', data);
+        // Réinitialisation du formulaire
+        setFormData({
+          nom: '',
+          prenom: '',
+          email: '',
+          message: ''
+        });
+        setMessageSent(true);
+        setTimeout(() => {
+          setMessageSent(false);
+        }, 3000);
+        recaptchaRef.current.reset();
+        setCaptchaToken(null);
+      })
+      .catch(error => {
+        console.error('Erreur:', error);
+        alert('Une erreur est survenue lors de l\'envoi du message.');
       });
-      
-      setMessageSent(true);
-      
-      setTimeout(() => {
-        setMessageSent(false);
-      }, 3000);
-
-      recaptchaRef.current.reset();
-      setCaptchaToken(null);
     } else {
       alert('Veuillez remplir tous les champs du formulaire et vérifier le reCAPTCHA.');
     }
@@ -172,7 +195,6 @@ export default function Contact() {
         </div>
         {!isMobile && (
           <div className="md:w-1/2 relative">
-            <div className="absolute inset-0 bg-red-600 rounded-lg transform translate-x-4 translate-y-2"></div>
             <Image 
               src={voyage} 
               alt="Service client" 
