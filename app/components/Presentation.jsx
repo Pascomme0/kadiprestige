@@ -1,23 +1,40 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import image from '../public/voyage.png'
 
 const Presentation = () => {
+  const [introData, setIntroData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://admin.kadiprestige.com/api/pages');
+        const data = await response.json();
+        const introSection = data.member.find(page => page.typePage.name === "Présentation")
+          .sections.find(section => section.code === "INTRO");
+        setIntroData(introSection.detailSections[0]);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!introData) {
+    return <div>Chargement...</div>;
+  }
+
+  // Concaténer l'URL de base avec le chemin de l'image
+  const imageUrl = `https://admin.kadiprestige.com${introData.imagePath}`;
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 sm:py-16">
-      <motion.h2 
-        className="text-center text-red-600 font-bold text-xl sm:text-2xl mb-4 sm:mb-8"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Kadi prestige
-      </motion.h2>
+     
       <motion.h3 
-        className="text-center text-blue-700 font-bold text-2xl sm:text-3xl mb-8 sm:mb-12"
+        className="text-center text-red-600 font-bold text-2xl sm:text-3xl mb-8 sm:mb-12"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -39,7 +56,7 @@ const Presentation = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              Kadi prestige une entreprise spécialisée dans la prestation services.
+              {introData.title}
             </motion.h4>
             <motion.p 
               className="text-sm sm:text-base"
@@ -47,7 +64,7 @@ const Presentation = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
             >
-              Kadi Prestige est une entreprise ivoirienne polyvalente, experte en solutions hydrauliques et bien plus. Nous excellons dans l'exécution de travaux de forage et d'adduction d'eau potable, tout en étendant notre savoir-faire à divers domaines tels que le BTP, la livraison de denrées alimentaires, et la confection d'uniformes. Notre engagement va au-delà des services commerciaux, avec une ONG dédiée à l'autonomisation des femmes et à l'aide aux personnes démunies.
+              {introData.description}
             </motion.p>
           </div>
         </motion.div>
@@ -58,8 +75,8 @@ const Presentation = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <Image 
-            src={image}
-            alt="Construction site"
+            src={imageUrl}
+            alt="Image de présentation"
             width={500}
             height={300}
             layout="responsive"

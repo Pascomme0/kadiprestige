@@ -1,12 +1,13 @@
 "use client";
 
 import Image from 'next/image';
-import image from '../public/image.png'
 import { motion } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
+import { useEffect, useState } from 'react';
 
 const Pourquoi = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const [imageSrc, setImageSrc] = useState('');
 
   const raisons = [
     {
@@ -26,6 +27,19 @@ const Pourquoi = () => {
     }
   ];
 
+  useEffect(() => {
+    const fetchImage = async () => {
+      const response = await fetch('https://admin.kadiprestige.com/api/pages');
+      const data = await response.json();
+      const workSection = data.member[1].sections.find(section => section.code === 'WORK');
+      if (workSection) {
+        setImageSrc(`https://admin.kadiprestige.com${workSection.imagePath}`);
+      }
+    };
+
+    fetchImage();
+  }, []);
+
   return (
     <div className="flex flex-col md:flex-row items-center mx-auto justify-between p-8 bg-white">
       {!isMobile && (
@@ -36,7 +50,7 @@ const Pourquoi = () => {
           transition={{ duration: 0.5 }}
         >
           <Image
-            src={image}
+            src={imageSrc}
             alt="Image de construction"
             width={500}
             height={300}

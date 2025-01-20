@@ -1,9 +1,39 @@
 'use client'
+import { useEffect, useState } from 'react';
 import Image from 'next/image'
-import cheffe from '../public/image.png'
 import { motion } from 'framer-motion'
 
 export default function CEOword() {
+  const [ceoData, setCeoData] = useState(null);
+
+  useEffect(() => {
+    async function fetchCeoData() {
+      try {
+        const response = await fetch('https://admin.kadiprestige.com/api/pages');
+        const data = await response.json();
+        const ceoSection = data.member.find(page => 
+          page.typePage.name === "Présentation"
+        ).sections.find(section => 
+          section.code === "CEO"
+        );
+        setCeoData(ceoSection);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données:', error);
+      }
+    }
+
+    fetchCeoData();
+  }, []);
+
+  const stripHtml = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+  };
+
+  if (!ceoData) {
+    return <div>Chargement...</div>;
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-16">
       <motion.h2 
@@ -23,7 +53,7 @@ export default function CEOword() {
           className="md:w-1/2 mb-8 md:mb-0 relative"
         >
           <Image
-            src={cheffe}
+            src={`https://admin.kadiprestige.com${ceoData.imagePath}`}
             alt="Mme. Kadi Diallo"
             width={400}
             height={400}
@@ -52,17 +82,10 @@ export default function CEOword() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="text-gray-600 mb-6"
           >
-            Chez Kadi Prestige, notre mission est de fournir des solutions innovantes et durables dans les domaines de l'hydraulique, du BTP et bien plus encore. Depuis notre création, nous nous efforçons d'apporter une valeur ajoutée à chaque projet que nous entreprenons, en mettant l'accent sur la qualité, l'efficacité et la satisfaction du client.
+            {stripHtml(ceoData.description)}
           </motion.p>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="text-gray-600 mb-6"
-          >
-            Notre engagement va au-delà des services commerciaux. Nous sommes fiers de notre ONG qui œuvre pour l'autonomisation des femmes et l'aide aux personnes démunies. Cette dimension sociale est au cœur de notre identité d'entreprise. Chez Kadi Prestige, nous croyons fermement que le succès commercial et la responsabilité sociale vont de pair pour créer un impact positif durable dans notre communauté.
-          </motion.p>
+        
         </motion.div>
       </div>
     </div>

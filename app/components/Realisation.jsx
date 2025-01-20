@@ -1,45 +1,33 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import voyage from '../public/voyage.png'
 import { useMediaQuery } from 'react-responsive';
 
-const projets = [
-  {
-    titre: "Forage d'eau potable à Bouaké",
-    description: "Réalisation d'un forage profond pour l'approvisionnement en eau potable de la communauté de Bouaké. Ce projet a permis d'améliorer significativement l'accès à l'eau propre pour plus de 5000 habitants de la région.",
-    image: voyage
-  },
-  {
-    titre: "Construction d'une école à Yamoussoukro",
-    description: "Édification d'un établissement scolaire moderne à Yamoussoukro, comprenant 12 salles de classe, une bibliothèque et des installations sanitaires. Ce projet a augmenté la capacité d'accueil scolaire de la ville de 500 élèves.",
-    image: voyage
-  },
-  {
-    titre: "Rénovation du réseau d'adduction d'eau à Abidjan",
-    description: "Modernisation et extension du réseau d'adduction d'eau dans plusieurs quartiers d'Abidjan. Cette initiative a permis d'améliorer la distribution d'eau pour plus de 100 000 résidents et de réduire les pertes d'eau de 30%.",
-    image: voyage
-  },
-  {
-    titre: "Construction d'un centre de santé à Man",
-    description: "Érection d'un centre de santé communautaire à Man, équipé de services de consultation, de maternité et d'un laboratoire. Ce projet a considérablement amélioré l'accès aux soins de santé pour plus de 20 000 personnes dans la région.",
-    image: voyage
-  },
-  {
-    titre: "Aménagement d'un marché couvert à Korhogo",
-    description: "Conception et construction d'un marché couvert moderne à Korhogo, offrant des espaces de vente sécurisés et hygiéniques pour plus de 200 commerçants locaux. Ce projet a dynamisé l'économie locale et amélioré les conditions de travail des vendeurs.",
-    image: voyage
-  },
-  {
-    titre: "Installation de panneaux solaires à Daloa",
-    description: "Mise en place d'un système d'énergie solaire pour alimenter les bâtiments publics de Daloa. Cette initiative a réduit la dépendance aux énergies fossiles et diminué les coûts énergétiques de la municipalité de 40%.",
-    image: voyage
-  },
-];
-
 export default function Realisation() {
+  const [projets, setProjets] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const projetsParPage = 3;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('https://admin.kadiprestige.com/api/pages');
+      const data = await response.json();
+      const makeSection = data.member.find(page => page.sections.some(section => section.code === 'MAKE'));
+      const makeProjects = makeSection.sections.find(section => section.code === 'MAKE').detailSections;
+
+      const formattedProjects = makeProjects.map(projet => ({
+        titre: projet.title,
+        description: projet.description,
+        image: `https://admin.kadiprestige.com${projet.imagePath}`
+      }));
+
+      setProjets(formattedProjects);
+    };
+
+    fetchData();
+  }, []);
+
   const indexOfLastProjet = currentPage * projetsParPage;
   const indexOfFirstProjet = indexOfLastProjet - projetsParPage;
   const currentProjets = projets.slice(indexOfFirstProjet, indexOfLastProjet);
