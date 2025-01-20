@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import voyage from '../public/voyage.png'
@@ -19,6 +19,7 @@ export default function Contact() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const [captchaToken, setCaptchaToken] = useState(null);
   const recaptchaRef = useRef(null);
+  const [imagePath, setImagePath] = useState('');
 
   const handleFocus = (inputName) => {
     setFocusedInput(inputName);
@@ -88,6 +89,25 @@ export default function Contact() {
       alert('Veuillez remplir tous les champs du formulaire et vérifier le reCAPTCHA.');
     }
   };
+
+  useEffect(() => {
+    // Récupération de l'image depuis l'API
+    fetch('https://admin.kadiprestige.com/api/sections/14')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur lors de la récupération de l\'image');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Assurez-vous que l'URL de l'image est complète
+        const baseUrl = 'https://admin.kadiprestige.com';
+        setImagePath(`${baseUrl}${data.imagePath}`);
+      })
+      .catch(error => {
+        console.error('Erreur:', error);
+      });
+  }, []);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
@@ -193,10 +213,10 @@ export default function Contact() {
             </div>
           )}
         </div>
-        {!isMobile && (
+        {!isMobile && imagePath && (
           <div className="md:w-1/2 relative">
             <Image 
-              src={voyage} 
+              src={imagePath} 
               alt="Service client" 
               width={500} 
               height={300} 

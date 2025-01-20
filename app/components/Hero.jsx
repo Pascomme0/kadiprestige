@@ -1,29 +1,36 @@
 "use client"; // Ensure this is a Client Component
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import banner1 from '../public/materiauxx.jpg'; 
-import banner2 from '../public/mode.jpg';
-import banner3 from '../public/kpvoyage.jpg';
-
-const images = [banner1, banner2, banner3];
-const texts = [
-  "Votre partenaire de confiance pour tous vos besoins professionnels",
-  "Des solutions sur mesure pour votre entreprise",
-  "Qualité, innovation et service à votre portée",
-];
 
 const Hero = () => {
+  const [banners, setBanners] = useState([]);
   const containerRef = useRef(null);
   const textRef = useRef(null);
   const slicesRef = useRef([]);
   const overlayRef = useRef(null);
 
   useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const response = await fetch('https://admin.kadiprestige.com/api/pages/4');
+        const data = await response.json();
+        setBanners(data.imageBannieres);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données de l'API", error);
+      }
+    };
+
+    fetchBanners();
+  }, []);
+
+  useEffect(() => {
+    if (banners.length === 0) return;
+
     gsap.registerPlugin(ScrollTrigger);
-    
+
     const container = containerRef.current;
     const textElement = textRef.current;
     const slices = slicesRef.current;
@@ -31,10 +38,10 @@ const Hero = () => {
 
     const tl = gsap.timeline({ repeat: -1 });
 
-    images.forEach((image, index) => {
-      const nextIndex = (index + 1) % images.length;
+    banners.forEach((banner, index) => {
+      const nextIndex = (index + 1) % banners.length;
       
-      tl.set(slices, { backgroundImage: `url(${image.src})` })
+      tl.set(slices, { backgroundImage: `url(https://admin.kadiprestige.com${banner.path})` })
         .fromTo(slices, 
           { x: (i) => i % 2 === 0 ? -100 : 100, opacity: 0 },
           { x: 0, opacity: 1, stagger: 0.05, duration: 1, ease: "power2.out" }
@@ -43,7 +50,7 @@ const Hero = () => {
         .fromTo(textElement,
           { y: 50, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.5, ease: "power2.out", onStart: () => {
-            textElement.textContent = texts[index];
+            textElement.textContent = banner.libelle;
           }}
         )
         .to({}, { duration: 2 }) // Pause
@@ -86,7 +93,7 @@ const Hero = () => {
       tl.kill();
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
-  }, []);
+  }, [banners]);
 
   return (
     <div className="relative top-16 mb-10 h-screen overflow-hidden">
@@ -111,7 +118,7 @@ const Hero = () => {
             ref={textRef}
             className="text-white text-4xl md:text-6xl font-bold text-center leading-10 px-4"
           >
-            {texts[0]}
+            {banners.length > 0 ? banners[0].libelle : ''}
           </h2>
         </div>
       </div>
