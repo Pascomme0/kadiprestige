@@ -17,6 +17,16 @@ export default function Partenaire() {
     { src: logo, alt: 'Logo Ministère de  Nationale' },
     { src: logo, alt: 'Logo Kadi Prestige Eau' },
     { src: logo, alt: 'Logo ONG Kadi Prestige' },
+    { src: logo, alt: 'Logo ONG Kadi Prestige' },
+    { src: logo, alt: 'Logo ONG Kadi Prestige' },
+    { src: logo, alt: 'Logo ONG Kadi Prestige' },
+    { src: logo, alt: 'Logo ONG Kadi Prestige' },
+    { src: logo, alt: 'Logo ONG Kadi Prestige' },
+    { src: logo, alt: 'Logo ONG Kadi Prestige' },
+    { src: logo, alt: 'Logo ONG Kadi Prestige' },
+    { src: logo, alt: 'Logo ONG Kadi Prestige' },
+
+    
   ];
 
   const [ref, inView] = useInView({
@@ -31,20 +41,69 @@ export default function Partenaire() {
     years: 0,
   });
 
-  useEffect(() => {
-    if (inView) {
-      const interval = setInterval(() => {
-        setCounts(prevCounts => ({
-          workers: Math.min(prevCounts.workers + 4, 403),
-          projects: Math.min(prevCounts.projects + 30, 3000),
-          clients: Math.min(prevCounts.clients + 1, 100),
-          years: Math.min(prevCounts.years + 1, 15),
-        }));
-      }, 20);
+  const [targetCounts, setTargetCounts] = useState({
+    workers: 0,
+    projects: 0,
+    clients: 0,
+    years: 0,
+  });
 
-      return () => clearInterval(interval);
-    }
-  }, [inView]);
+  const [imagePath, setImagePath] = useState('');
+  const [logos, setLogos] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://admin.kadiprestige.com/api/pages');
+        const data = await response.json();
+        const pageData = data.member.find(page => page.typePage.name === "Accueil");
+        const countSection = pageData.sections.find(section => section.code === "COUNT");
+        const detailSections = countSection.detailSections;
+
+        const newCounts = {
+          workers: parseInt(detailSections.find(detail => detail.subTitle === "Employés qualifiés").title),
+          projects: parseInt(detailSections.find(detail => detail.subTitle === "Projets réalisés en Côte d'Ivoire").title),
+          clients: parseInt(detailSections.find(detail => detail.subTitle === "Clients satisfaits").title),
+          years: parseInt(detailSections.find(detail => detail.subTitle === "Années d'expérience").title),
+        };
+
+        setTargetCounts(newCounts);
+        setImagePath(countSection.imagePath);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données de l'API", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounts(prevCounts => ({
+        workers: Math.min(prevCounts.workers + 4, targetCounts.workers),
+        projects: Math.min(prevCounts.projects + 30, targetCounts.projects),
+        clients: Math.min(prevCounts.clients + 1, targetCounts.clients),
+        years: Math.min(prevCounts.years + 1, targetCounts.years),
+      }));
+    }, 20);
+
+    return () => clearInterval(interval);
+  }, [targetCounts]);
+
+  useEffect(() => {
+    fetch('https://admin.kadiprestige.com/api/pages')
+      .then(response => response.json())
+      .then(data => {
+        const pageData = data.member.find(page => page.typePage.name === "Accueil")
+        const logoSection = pageData.sections.find(section => section.code === "LOGOS")
+        const logoDetails = logoSection.detailSections
+        setLogos(logoDetails.map(detail => ({
+          src: `https://admin.kadiprestige.com${detail.imagePath}`,
+          alt: detail.title
+        })))
+      })
+      .catch(error => console.error('Erreur lors du chargement des logos', error))
+  }, [])
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -53,6 +112,24 @@ export default function Partenaire() {
 
   return (
     <div className="min-h-screen bg-white">
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(100%);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+        .overflow-hidden {
+          width: 100%;
+          white-space: nowrap;
+        }
+        .animate-scroll {
+          display: inline-flex;
+          animation: scroll 20s linear infinite;
+        }
+      `}</style>
       <motion.div 
         className="bg-blue-700 text-white pt-8 sm:pt-16 pb-16 sm:pb-32 px-4 sm:px-6 lg:px-8 relative"
         initial="hidden"
@@ -122,11 +199,11 @@ export default function Partenaire() {
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
         >
-          {!isMobile && (
+          {!isMobile && imagePath && (
             <div className="w-full sm:w-1/3 pr-0 sm:pr-8 mb-4 sm:mb-0">
               <Image
-                src={image}
-                alt="Équipe KADI PRESTIGE en action"
+                src={`https://admin.kadiprestige.com${imagePath}`}
+                alt="Image de la section COUNT"
                 width={300}
                 height={300}
                 className="w-full h-auto"
@@ -174,25 +251,21 @@ export default function Partenaire() {
             KADI PRESTIGE collabore avec des acteurs majeurs en Côte d'Ivoire
           </motion.p>
           <motion.div 
-            className="flex flex-wrap justify-between items-center"
-            variants={fadeInUp}
-            transition={{ staggerChildren: 0.1 }}
+            className="overflow-hidden"
           >
-            {clientLogos.map((logo, index) => (
-              <motion.div 
-                key={index} 
-                className="flex items-center justify-center gap-4 w-1/2 sm:w-auto mb-4 sm:mb-0"
-                variants={fadeInUp}
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={100}
-                  height={50}
-                  className="max-w-full h-auto"
-                />
-              </motion.div>
-            ))}
+            <div className="flex animate-scroll space-x-14">
+              {logos.map((logo, index) => (
+                <div key={index} className="flex-none w-1/5 p-4">
+                  <Image 
+                    src={logo.src} 
+                    alt={logo.alt} 
+                    width={175}
+                    height={100}
+                    className="max-w-full  h-auto" 
+                  />
+                </div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </div>

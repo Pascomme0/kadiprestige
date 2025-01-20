@@ -1,30 +1,37 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 export default function FAQSection() {
   const [openQuestion, setOpenQuestion] = useState(0)
+  const [faqData, setFaqData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const faqData = [
-    {
-      question: "Quels sont les services proposés par Kadi Prestige ?",
-      answer: "Kadi Prestige offre une gamme variée de services, incluant des travaux de forage et d'adduction d'eau potable, des projets de BTP (construction de routes et de bâtiments), la livraison de denrées alimentaires, la production et distribution d'eau potable 'Kadi Prestige', ainsi que la confection de tenues et uniformes de travail. Nous avons également une ONG dédiée à l'autonomisation des femmes et à l'aide aux personnes démunies."
-    },
-    {
-      question: "Comment puis-je demander un devis pour un projet ?",
-      answer: "Pour obtenir un devis, vous pouvez nous contacter via notre formulaire en ligne sur notre site web, nous appeler directement au numéro indiqué dans la section contact, ou nous envoyer un email détaillant votre projet. Notre équipe vous répondra dans les plus brefs délais pour discuter de vos besoins spécifiques et vous fournir une estimation précise."
-    },
-    {
-      question: "Quelle est la zone géographique couverte par vos services ?",
-      answer: "Kadi Prestige opère principalement en Côte d'Ivoire, avec une présence forte à Abidjan et dans les principales villes du pays. Cependant, nous sommes en mesure de réaliser des projets sur l'ensemble du territoire national et sommes ouverts à des opportunités dans la sous-région ouest-africaine selon la nature et l'envergure du projet."
-    },
-    {
-      question: "Comment Kadi Prestige garantit-elle la qualité de ses services ?",
-      answer: "Chez Kadi Prestige, nous accordons une importance primordiale à la qualité. Nous employons des professionnels hautement qualifiés, utilisons des équipements modernes et suivons rigoureusement les normes internationales dans tous nos projets. De plus, nous effectuons des contrôles qualité réguliers et sollicitons systématiquement les retours de nos clients pour assurer une amélioration continue de nos services."
-    }
-  ]
+  useEffect(() => {
+    fetch('https://admin.kadiprestige.com/api/pages')
+      .then(response => response.json())
+      .then(data => {
+        const faqSection = data.member.find(page => 
+          page.sections.some(section => section.code === 'FAQ')
+        )
+        const faqDetails = faqSection.sections.find(section => section.code === 'FAQ').detailSections
+        setFaqData(faqDetails.map(detail => ({
+          question: detail.title,
+          answer: detail.description
+        })))
+        setLoading(false)
+      })
+      .catch(error => {
+        setError('Erreur lors du chargement des données FAQ')
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) return <p>Chargement...</p>
+  if (error) return <p>{error}</p>
 
   return (
     <motion.div 

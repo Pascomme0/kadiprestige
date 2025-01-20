@@ -8,36 +8,36 @@ import { useEffect, useState } from 'react';
 const Pourquoi = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [imageSrc, setImageSrc] = useState('');
+  const [raisons, setRaisons] = useState([]);
+  const [titre, setTitre] = useState('');
+  const [description, setDescription] = useState('');
 
-  const raisons = [
-    {
-      numero: 1,
-      titre: "Expertise polyvalente",
-      description: "Notre équipe possède une vaste expérience dans divers domaines, de l'hydraulique au BTP, garantissant des solutions complètes pour vos projets."
-    },
-    {
-      numero: 2,
-      titre: "Engagement social",
-      description: "Au-delà de nos services, notre ONG s'engage activement dans l'autonomisation des femmes et l'aide aux personnes démunies."
-    },
-    {
-      numero: 3,
-      titre: "Qualité et fiabilité",
-      description: "Nous nous engageons à fournir des services de haute qualité, respectant les normes les plus strictes pour assurer la satisfaction de nos clients."
-    }
-  ];
+  // Fonction pour supprimer les balises HTML
+  const stripHTML = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+  };
 
   useEffect(() => {
-    const fetchImage = async () => {
+    const fetchData = async () => {
       const response = await fetch('https://admin.kadiprestige.com/api/pages');
       const data = await response.json();
-      const workSection = data.member[1].sections.find(section => section.code === 'WORK');
+      const workSection = data.member.find(page => page.typePage.name === 'Présentation')
+        .sections.find(section => section.code === 'WORK');
+      
       if (workSection) {
         setImageSrc(`https://admin.kadiprestige.com${workSection.imagePath}`);
+        setTitre(stripHTML(workSection.title)); // Nettoyage du titre
+        setDescription(stripHTML(workSection.description)); // Nettoyage de la description
+        setRaisons(workSection.detailSections.map((detail, index) => ({
+          numero: index + 1,
+          titre: stripHTML(detail.title), // Nettoyage du titre
+          description: stripHTML(detail.description) // Nettoyage de la description
+        })));
       }
     };
 
-    fetchImage();
+    fetchData();
   }, []);
 
   return (
@@ -70,7 +70,7 @@ const Pourquoi = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Pourqoi travailler avec nous ?
+          {titre}
         </motion.h2>
         <motion.p 
           className="text-[#818181] mb-6"
@@ -78,7 +78,7 @@ const Pourquoi = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Kadi Prestige se distingue par son expertise diversifiée et son engagement envers l'excellence et la responsabilité sociale.
+          {description}
         </motion.p>
         
         {raisons.map((raison, index) => (
