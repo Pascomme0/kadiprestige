@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState, useEffect } from "react"
 import Detailservice from '../../../components/Detailservice'
 import banner from '../../../public/assurance.jpg'
 import Banner from '../../../components/Banner'
@@ -6,13 +7,33 @@ import Pourquoi from '@/app/components/Pourquoi'
 import mode from '../../../public/mode.jpg'
 
 
-const page = () => {
-  const serviceDetails = {
-    titre: "BTP",
-    description: "Chez Kadi Prestige, notre service BTP (Bâtiment et Travaux Publics) offre une expertise complète dans la construction et la rénovation. Nous prenons en charge tous types de projets, des petites rénovations résidentielles aux grands chantiers commerciaux et industriels. Notre équipe qualifiée assure la gestion de projet, la construction, la rénovation, et la maintenance des bâtiments. Nous nous engageons à respecter les normes de sécurité les plus strictes et à utiliser des matériaux de haute qualité pour garantir la durabilité et la qualité de nos réalisations. Que ce soit pour la construction de nouvelles structures, la rénovation d'anciens bâtiments, ou des travaux d'infrastructure, Kadi Prestige est votre partenaire de confiance pour tous vos besoins en BTP.",
+const Page = () => {
+  const [serviceDetails, setServiceDetails] = useState({
+    titre: "",
+    description: "",
     imageUrl: banner,
     couleurFond: "#ea1d24"
-  }
+  })
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://admin.kadiprestige.com/api/detail_sections/30")
+        const data = await response.json()
+
+        setServiceDetails((prevState) => ({
+          ...prevState,
+          titre: data.title,
+          description: data.description,
+          imageUrl: `https://admin.kadiprestige.com${data.imagePath}`,
+        }))
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <div>
@@ -23,4 +44,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

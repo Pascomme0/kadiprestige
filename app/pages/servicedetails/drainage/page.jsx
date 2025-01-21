@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState, useEffect } from "react"
 import Detailservice from '../../../components/Detailservice'
 import banner from '../../../public/assurance.jpg'
 import Banner from '../../../components/Banner'
@@ -6,13 +7,34 @@ import Pourquoi from '@/app/components/Pourquoi'
 import mode from '../../../public/mode.jpg'
 
 
-const page = () => {
-  const serviceDetails = {
-    titre: "Drainage et Hydraulique",
-    description: "Chez Kadi Prestige, notre service de Drainage et Hydraulique offre des solutions complètes pour la gestion de l'eau. Nous concevons et installons des systèmes de drainage efficaces pour prévenir les inondations et l'accumulation d'eau. Notre expertise s'étend également aux systèmes hydrauliques, assurant une distribution et une gestion optimales de l'eau dans divers contextes. Que ce soit pour des projets résidentiels, commerciaux ou industriels, notre équipe qualifiée utilise des technologies de pointe pour créer des solutions durables et respectueuses de l'environnement. Nous nous engageons à résoudre les problèmes d'eau complexes, à améliorer l'irrigation, et à optimiser l'utilisation des ressources hydriques. Avec Kadi Prestige, vous bénéficiez d'un service professionnel qui garantit une gestion de l'eau efficace et responsable pour tous vos besoins en drainage et hydraulique.",
+const Page = () => {
+  const [serviceDetails, setServiceDetails] = useState({
+    titre: "",
+    description: "",
     imageUrl: banner,
     couleurFond: "#073ea2"
-  }
+  })
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://admin.kadiprestige.com/api/detail_sections/29")
+        const data = await response.json()
+
+        setServiceDetails((prevState) => ({
+          ...prevState,
+          titre: data.title,
+          description: data.description,
+          imageUrl: `https://admin.kadiprestige.com${data.imagePath}`,
+        }))
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
 
   return (
     <div>
@@ -23,4 +45,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
