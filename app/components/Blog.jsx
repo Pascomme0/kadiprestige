@@ -64,6 +64,14 @@ function App() {
     );
   }
 
+  if (articles.length === 0) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-xl font-semibold text-gray-600">Aucun article disponible</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">

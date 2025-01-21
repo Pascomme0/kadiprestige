@@ -15,6 +15,11 @@ const Page = () => {
     couleurFond: "#ea1d24",
   })
 
+  const [bannerDetails, setBannerDetails] = useState({
+    title: "",
+    imageUrl: "",
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,14 +35,28 @@ const Page = () => {
       } catch (error) {
         console.error("Error fetching data:", error)
       }
-    }
+    };
+    const fetchBannerDetails = async () => {
+      try {
+        const response = await fetch("https://admin.kadiprestige.com/api/detail_sections/36");
+        const data = await response.json();
 
-    fetchData()
+        setBannerDetails({
+          title: data.title,
+          imageUrl: `https://admin.kadiprestige.com${data.imagePath}`,
+        });
+      } catch (error) {
+        console.error("Error fetching banner details:", error);
+      }
+    };
+
+    fetchData();
+    fetchBannerDetails();
   }, [])
 
   return (
     <div>
-      <Banner imageUrl={mode} title={serviceDetails.titre} />
+      <Banner imageUrl={bannerDetails.imageUrl} title={bannerDetails.title} />
       <Detailservice {...serviceDetails} />
       <Pourquoi />
     </div>
