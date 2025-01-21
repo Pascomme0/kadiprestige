@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../public/logoblanc.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebookF, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
 const Footer = () => {
   return (
@@ -59,7 +59,7 @@ const Footer = () => {
                 <FontAwesomeIcon icon={faFacebookF} className="w-6 h-6" />
               </Link>
               <Link href="#" aria-label="LinkedIn" className="hover:text-blue-300 transition-colors duration-300">
-                <FontAwesomeIcon icon={faLinkedinIn} className="w-6 h-6" />
+                <FontAwesomeIcon icon={faInstagram} className="w-6 h-6" />
               </Link>
             </div>
           </div>
