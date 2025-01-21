@@ -55,7 +55,7 @@ const Footer = () => {
           <div>
             <h3 className="font-bold mb-4">Nos réseaux</h3>
             <div className="flex space-x-4">
-              <Link href="#" aria-label="Facebook" className="hover:text-blue-300 transition-colors duration-300">
+              <Link href="https://www.facebook.com/kadiprestigeci" aria-label="Facebook" className="hover:text-blue-300 transition-colors duration-300" target="_blank">
                 <FontAwesomeIcon icon={faFacebookF} className="w-6 h-6" />
               </Link>
               <Link href="#" aria-label="LinkedIn" className="hover:text-blue-300 transition-colors duration-300">
